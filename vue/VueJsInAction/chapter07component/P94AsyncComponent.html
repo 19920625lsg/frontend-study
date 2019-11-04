@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>异步组价</title>
+</head>
+<body>
+<div id="app">
+    <child-component></child-component>
+</div>
+<script>
+    Vue.component('child-component', function (resolve, reject) {
+        window.setTimeout(function () {
+            resolve({
+                template: '<div>我是异步渲染过来地</div>'
+            });
+        }, 2000);
+    });
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": {
+    "title": "Vue-cli 3.0初体验",
+    "content":"<img\n  src=\"https://upload-images.jianshu.io/upload_images/5616361-de9168ea83266dd8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/900/format/webp\"\n                        alt=\"\"/>\n                    <p>Vue-cli，即Vue脚手架工具，可以用来快速创建Vue+Webpack项目结构。如果你对Webpack还不了解，欢迎阅读我之前写过的 Webpack轻松入门系列教程。</p>\n                    <p>接触它已经有半年多了，可之前一直使用的是Vue 2.0版本，成功开发过一个项目之后就一直没更新过，往后每次的项目都是直接复制前一个项目文件而在其基础上改的，如今上Vue官网一看，脚手架都早已出3.0版了。唉，果然干这行一天不学习都感觉要落伍……</p>\n                    <p>闲言少叙，接下来我将以尽量简单的语言带领大家开始一段Vue-cli 3.0之旅~</p>\n                    <p>本文只是对Vue-cli 3.0最基础的介绍，如需详细了解，可直接查看官方文档（https://cli.vuejs.org/zh/）</p>"
+  }
+}

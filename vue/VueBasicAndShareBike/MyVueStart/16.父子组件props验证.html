@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>父子组件props类型验证</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<hello-com :msg="param"></hello-com>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.component("hello-com", {
+			props: {
+				//如果该是String但是传成了int类型控制台就会报错的，
+				//但是仍能正常显示出int类型的数来
+				msg: String
+			},
+			template: "<h1>{{msg}}</h1>"
+		})
+
+		var v = new Vue({
+			el: "#app",
+			data: {
+				param: "abcd"
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>父子组件间的数据传递</title>
+</head>
+<body>
+<div id="app">
+    <!--用冒号可以把数值传递过去，不加冒号传递地是字符串-->
+    <counter :count="0"></counter>
+    <counter :count="1"></counter>
+</div>
+<script>
+    let counter = {
+        props: ['count'],
+        // 子组件的data必须是一个函数
+        data: function () {
+            return {
+                // 要想改变父组件的参数，子组件在data项中新赋值父组件的变量，操作新定义的变量即可
+                number: this.count
+            }
+        },
+        template: '<div @click="handleClick">{{number}}</div>',
+        methods: {
+            handleClick() {
+                this.number++;
+            }
+        }
+    };
+
+    let vm = new Vue({
+        el: '#app',
+        components: {
+            counter
+        }
+    });
+</script>
+</body>
+</html>

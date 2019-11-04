@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>给组件绑定原生事件</title>
+</head>
+<body>
+<div id="app">
+    <h2>若在组件上绑定原生事件，只需在自定义事件后加.native修饰符即可，不加native是弹不出来东西的。这个只弹出father click</h2>
+    <child @click.native="handleClick"></child>
+</div>
+<script>
+    Vue.component('child', {
+        template: '<div>Child</div>',
+    });
+    let vm = new Vue({
+        el: '#app',
+        methods: {
+            handleClick() {
+                alert('father click');
+            }
+        }
+    });
+</script>
+</body>
+</html>

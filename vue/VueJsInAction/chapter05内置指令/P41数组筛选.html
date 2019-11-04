@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>数组筛选</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <!--v-for也可以应用在内置标签<template>上，将多个元素进行渲染，但template本身不会在dom上渲染-->
+        <template v-for="book in books">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+    </ul>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {
+                    name: '《Vue.js实战》',
+                    author: '梁山广'
+                },
+                {
+                    name: '《JavaScript语言精粹》',
+                    author: '王蕊'
+                },
+                {
+                    name: '《JavaScript高级程序设计》',
+                    author: '金小小'
+                }
+            ]
+        }
+    })
+
+    // 过滤出含有JavaScript的书
+    app.books = app.books.filter(function (item) {
+        return item.name.match(/JavaScript/)
+    })
+</script>
+</body>
+</html>

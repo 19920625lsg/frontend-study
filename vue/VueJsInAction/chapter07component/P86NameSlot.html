@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>单个slot的使用</title>
+</head>
+<body>
+<div id="app">
+    <child-component>
+        <h2 slot="header">标题</h2>
+        <p>正文内容</p>
+        <p>更多正文内容</p>
+        <div slot="footer">底部信息</div>
+    </child-component>
+
+</div>
+<script>
+    Vue.component('child-component', {
+        template: '\
+       <div class="container">\n' +
+        '        <div class="header">\n' +
+        '            <slot name="header"></slot>\n' +
+        '        </div>\n' +
+        '        <div class="main">\n' +
+        '            <slot></slot>\n' +
+        '        </div>\n' +
+        '        <div class="footer">\n' +
+        '            <slot name="footer"></slot>\n' +
+        '        </div>\n' +
+        '    </div>'
+    });
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

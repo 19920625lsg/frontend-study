@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>全局组件和局部组件,组件写法是w3c规则,小写并且包含一个短杠</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			{{message}}
+			<first-com></first-com>
+			<child-com></child-com>
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 全局组件
+		Vue.component('first-com', {
+			//必须要有一个根div
+			template: "<div><h1>这是第一个全局组件{{count}}</h1><button @click='addOne'>+1</button></div>",
+			//data必须是函数,必须是下面的带返回值的函数
+			data: function() {
+				return {
+					count: 1
+				}
+			},
+			methods: {
+				addOne: function() {
+					this.count++;
+				}
+			}
+		})
+
+		// 局部组件
+		var Child = {
+			template: '<h2>这是第一个局部组件</h2>'
+		}
+
+		var v = new Vue({
+			el: '#app',
+			data: {
+				message: '第一个作用域名'
+			},
+			//局部组件必须注册才能在另一个组建中使用
+			components: {
+				'child-com': Child
+			}
+		})
+	</script>
+
+</html>

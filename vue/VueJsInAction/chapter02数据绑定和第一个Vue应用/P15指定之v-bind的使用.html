@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P15指定之v-bind的使用</title>
+</head>
+<body>
+<div id="app">
+    <a :href="url">链接</a>
+    <img :src="imgUrl" alt="">
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            url: 'https://cn.vuejs.org/v2/guide',
+            imgUrl: 'https://cn.vuejs.org/images/logo.png'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>根据数据只能选择不同的组件</title>
+</head>
+<body>
+<div id="app">
+    <smart-item :data="data"></smart-item>
+    <button @click="change('img')">切换为图片组件</button>
+    <button @click="change('video')">切换为视频组件</button>
+    <button @click="change('text')">切换为文本组件</button>
+</div>
+<script>
+    // 图片组件选项
+    var ImgItem = {
+        props: ['data'],
+        render: function (createElement) {
+            return createElement('div', [
+                createElement('p', '图片组件'),
+                createElement('p', {
+                    attrs: {
+                        src: this.data.url
+                    }
+                })
+            ]);
+        }
+    };
+    // 视频组件选项
+    var VideoItem = {
+        props: function (createElement) {
+            return createElement('div', [
+                createElement('p', '视频组件'),
+                createElement('video', {
+                    attrs: {
+                        src: this.data.url,
+                        controls: 'controls',
+                        autoplay: 'autoplay'
+                    }
+                })
+            ]);
+        }
+    };
+    // 纯文本组件选项
+    var TextItem = {
+        props: ['data'],
+        render: function (createElement) {
+            return createElement('div', [
+                createElement('p', '纯文本组件'),
+                createElement('p', this.data.text)
+            ]);
+        }
+    };
+
+    Vue.component('smart-item', {
+        // 函数化组件
+        functional: true,
+        render: function (createElement, context) {
+            // 根据传入的数据，只能判断显示哪种组件
+            function getComponent() {
+                var data = context.props.data;
+                // 判断prop:data的type字段属于哪种类型的组件
+                if (data.type === 'img') {
+                    return ImgItem;
+                }
+                if (data.type === 'video') {
+                    return VideoItem;
+                }
+                return TextItem;
+            }
+
+            return createElement(
+                getComponent(),
+                {
+                    props: {
+                        // 把smart-item的prop:data传给上面的智能选择的组件
+                        data: context.props.data
+                    }
+                },
+                context.children
+            )
+        },
+        props: {
+            data: {
+                type: Object,
+                required: true
+            }
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            data: {}
+        },
+        methods: {
+            // 切换不同类型组件的数据
+            change: function (type) {
+                if (type === 'img') {
+                    this.data = {
+                        type: 'img',
+                        url: 'https://iview.github.io/dist/a0e88e83800f138b94d2414621bd9704.png'
+                    }
+                } else if (type === 'video') {
+                    this.data = {
+                        type: 'video',
+                        url: 'https://iview.github.io/dist/fe8d29da1225d943e30f9ee1bddce78f.png'
+                    }
+                } else if (type === 'text') {
+                    this.data = {
+                        type: 'text',
+                        content: '这是一段纯文本'
+                    }
+                }
+            }
+        },
+        created: function () {
+            // 初始化时，默认设置图片组件的数据
+            this.change('img');
+        }
+    })
+</script>
+</body>
+</html>

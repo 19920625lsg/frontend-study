@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.js"></script>
+    <title>基础动画钩子函数结合Velocity实现动画(离场动画leave类似，这里只讲enter)</title>
+</head>
+<body>
+<div id="root">
+    <!--@xxx-leave和xxx-enter类型的函数的讲解见README.md-->
+    <transition name="fade"
+                @before-enter="handleBeforeEnter"
+                @enter="handleEnter"
+                @after-enter="handleAfterEnter"
+    >
+        <div v-if="show">hello world</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            },
+            handleBeforeEnter(el) {
+                el.style.opacity = 0;
+            },
+            handleEnter(el, done) {
+                // 渐入效果维持1s.complete表示动画执行完后会自动执行complete对应的函数
+                Velocity(el, {opacity: 1}, {duration: 1000, complete: done})
+            },
+            handleAfterEnter(el) {
+                alert("动画结束");
+            }
+        }
+    });
+</script>
+</body>
+</html>

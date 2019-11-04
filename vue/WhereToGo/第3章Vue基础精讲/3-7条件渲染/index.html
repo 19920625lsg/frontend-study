@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>条件渲染</title>
+</head>
+<body>
+<div id="app">
+    <!--下面的v-if和v-show可以在控制台用vm.show来测试-->
+    <!--v-if当show 为false的时候，div是压根就不会在dom上出现地-->
+    <div v-if="show" cmd="v-if">{{message}}</div>
+    <!--v-else和最邻接的v-if自动配对，类似编程语言中的if else-->
+    <div v-else cmd="v-else">{{message+' by v-else'}}</div>
+    <!--v-show当show 为false的时候，div会在dom上出现，但但是不会呈现给用户(display:none)-->
+    <div v-show="show" cmd="v-show">{{message}}</div>
+
+
+    <!--if else if else,可以在控制台用vm.test='c'可以来测试-->
+    <div v-if="test==='a'">This is a</div>
+    <div v-else-if="test==='b'">This is b</div>
+    <div v-else>This is others</div>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            message: "Hello World",
+            test: 'b'
+        }
+    });
+</script>
+</body>
+</html>

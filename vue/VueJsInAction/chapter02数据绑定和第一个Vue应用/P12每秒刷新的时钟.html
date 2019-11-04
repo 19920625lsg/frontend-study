@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    {{date}}
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            date: new Date()
+        },
+        /**
+         * 钩子函数:实例完成后调用，此阶段完成了数据的观测等，但尚未挂载，$el还不可用，在需要初始化处理一些数据时会比较有用
+         */
+        created() {
+            // Vue实例本身也代理了data对象里的所有属性
+            console.log(this.a)
+        },
+        /**
+         * 钩子函数:el挂载到实例上后调用，一般我们的第一个业务逻辑会在这里开启
+         */
+        mounted() {
+            let _this = this
+            this.timer = setInterval(function () {
+                // 修改数据date
+                _this.date = new Date()
+            }, 1000)
+        },
+        /**
+         * 钩子函数:实例销毁之前调用。主要解绑一些使用addEventListener监听的事件等
+         */
+        beforeDestroy() {
+            if (this.timer) {
+                clearInterval(this.timer)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

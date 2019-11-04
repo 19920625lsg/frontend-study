@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>v-if的例子</h2>
+			<!--v-if为懒加载,只有在用到的时候才加载,即不断的修改dom --->
+			<p class="alert alert-success" v-if="flag">这是一个v-if的测试案例</p>
+			<!--v-if的多分支测试-->
+			<p class="alert alert-info" v-if="level === 1">管理员</p>
+			<p class="alert alert-info" v-else-if="level === 2">普通用户</p>
+			<p class="alert alert-info" v-else="level === 3">游客</p>
+			<!--v-show不管初始条件是什么,元素总是会被渲染的,即节点一直存在,只切换display状态-->
+			<h2>v-show的例子</h2>
+			<p class="alert alert-warning" v-show="level === 2">管理员</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				flag: true,
+				level: 2
+			}
+		})
+	</script>
+
+</html>

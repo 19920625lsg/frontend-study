@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>在Vue中使用插槽</title>
+</head>
+<body>
+<div id="root">
+    <child>
+        <!--下面的一行dom内容可以在子组件中直接用solt进行引用-->
+        <p>Dell</p>
+        <h1>DellH1</h1>
+    </child>
+</div>
+<script>
+    Vue.component('child', {
+        template: '<div' +
+            '><p>hello</p>' +
+            '<slot>当插槽没传内容的时候使用这部分作为默认内容</slot>' +
+            '</div>'
+    });
+    let vm = new Vue({
+        el: '#root'
+    });
+</script>
+</body>
+</html>

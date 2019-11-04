@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>todolist</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="inputValue">
+    <button @click="handleBtnClick">提交</button>
+    <ul>
+        <!--组件的驼峰必须转换成连线的形式.-->
+        <!--v-bind指令可以缩写为一个冒号，v-on指令可以缩写为@符号-->
+        <todo-item v-for="item in list" :content="item"/>
+    </ul>
+</div>
+<script>
+    <!--创建全局组件-->
+    let TodoItem = {
+        // 父组件传值给子组件
+        props: ['content'],
+        template: "<li>{{content}}</li>"
+    };
+    let app = new Vue({
+        el: '#app',
+        components: {
+            // TodoItem:TodoItem 当两者相同时，用如下的一个名字即可
+            TodoItem
+        },
+        data: {
+            list: ['第一课的内容', '第二课的内容', '343524'],
+            inputValue: ''
+        },
+        methods: {
+            handleBtnClick: function () {
+                this.list.push(this.inputValue);
+                this.inputValue = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>

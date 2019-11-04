@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>创造出多个Child组件,id不能重复</title>
+</head>
+<body>
+<div id="app">
+    <ele></ele>
+</div>
+<script>
+    // 声明子组件
+    var Child = {
+        render: function (createElement) {
+            return createElement('p', 'text');
+        }
+    };
+
+    Vue.component('ele', {
+        render: function (createElement) {
+            return createElement(
+                'div',
+                Array.apply(null, {
+                    // 创造出5个组件来
+                    length: 5
+                }).map(function () {
+                    return createElement(Child);
+                })
+            );
+        }
+    });
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

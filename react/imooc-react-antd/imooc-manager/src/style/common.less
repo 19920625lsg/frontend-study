@@ -1,0 +1,22 @@
+@import "./default";
+@import "./loading";
+
+.container {
+  display: flex;
+  .nav-left {
+    // 左侧菜单不满的措施，结合calc一起器作用
+    background-color: #001529;
+    color: #ffffff;
+    //自动撑满屏幕，call方法的使用好好学下
+    height: calc(100vh);
+  }
+  .main {
+    background-color: @colorL;
+    height: calc(100vh);
+    overflow: auto;
+    .content {
+      padding: 20px 20px 5px 20px;
+      position: relative;
+    }
+  }
+}

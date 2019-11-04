@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>具名插槽</title>
+</head>
+<body>
+<div id="root">
+    <body-content>
+        <!--具名插槽可以防止多个dom内容被合成一个插槽,否则header和footer会被合并到一起-->
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+    </body-content>
+</div>
+<script>
+    Vue.component('body-content', {
+        template: `<div>
+                    <slot name="header">默认内容(插槽不传内容时显示，也可以是复杂的样式结构)</slot>
+                    <div class="class">content</div>
+                    <slot name="footer">默认内容(插槽不传内容时显示，也可以是复杂的样式结构)</slot>
+                 </div>`
+    })
+
+    let vm = new Vue({
+        el: '#root'
+    });
+</script>
+</body>
+</html>

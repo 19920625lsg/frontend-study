@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>多个元素或组件的过渡</title>
+    <style>
+        /*当transition不起名字的时候默认用'v-xxx'，起了名字就用'名字-xxx'*/
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+
+<body>
+<div id="root">
+    <h3>mode=out-in，先隐藏再展示.控制语句来组合多个组件</h3>
+    <transition mode="out-in">
+        <!--加上Key后Vue的元素复用就不会起作用了，可以正常显示动画效果-->
+        <child v-if="show"></child>
+        <child-one v-else></child-one>
+    </transition>
+    <h3>mode=out-in，先隐藏再展示.动态组件来组合多个组件</h3>
+    <transition mode="out-in">
+        <component :is="type"/>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    Vue.component('child', {
+        template: '<div>Hello</div>'
+    });
+    Vue.component('child-one', {
+        template: '<div>Bye</div>'
+    });
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            show: true,
+            type: 'child'
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+                this.type = this.type === 'child' ? 'child-one' : 'child';
+            }
+        }
+    });
+</script>
+</body>
+</html>

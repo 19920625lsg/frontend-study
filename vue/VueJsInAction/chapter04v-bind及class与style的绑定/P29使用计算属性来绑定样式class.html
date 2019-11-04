@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P29使用计算属性来绑定样式class</title>
+</head>
+<body>
+<div id="app">
+    <!--<button class="btn btn-large btn-disabled">Button</button>-->
+    <button :class="classes">Button</button>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            size: 'large',
+            disabled: true
+        },
+        computed: {
+            classes() {
+                return [
+                    'btn',
+                    {
+                        ['btn-' + this.size]: this.size !== '',
+                        ['btn-disabled']: this.disabled
+                    }
+                ]
+            }
+        }
+    })
+</script>
+</body>
+</html>

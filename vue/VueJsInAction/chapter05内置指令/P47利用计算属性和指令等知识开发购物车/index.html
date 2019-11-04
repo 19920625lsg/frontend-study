@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>P47利用计算属性和指令等知识开发购物车</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!--list的长度为0的时候template消失-->
+    <template v-if="list.length">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>商品名称</th>
+                <th>商品单价</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item,index) in list">
+                <td>{{index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <!--冒号是把元素自带地属性和vue实例中的data进行绑定-->
+                    <button @click="handleReduce(index)" :disabled="item.count === 1">-</button>
+                    {{item.count}}
+                    <button @click="handleAdd(index)">+</button>
+                </td>
+                <td>
+                    <button @click="handleRemove(index)">移除</button>
+                </td>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div>总价：￥{{totalPrice}}</div>
+    </template>
+    <div v-else>购物车为空</div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告,这两行要放在下面，要不会出现找不到"element #app"的错误 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

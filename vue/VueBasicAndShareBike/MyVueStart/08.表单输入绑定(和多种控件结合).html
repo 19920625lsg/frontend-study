@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>数据绑定</h2>
+			<!--最常用的单向绑定-->
+			<div class="alert alert-success">{{message}}</div>
+			<!--v-bind是单向绑定,vue绝大部门都是单向绑定,只有v-model是双向绑定-->
+			<input type="text" v-bind:value="message" class="input-lg" /><br />
+			<!--双向绑定,只有v-model可以-->
+			<input type="text" v-model="message" class="input-lg" />
+			<!--white-space: pre;是为了把换行符原封不动地展示出来-->
+			<p class="alert alert-danger" style="white-space: pre;">{{longText}}</p>
+			<textarea v-model="longText"></textarea>
+			<hr />
+			<h2>和checkbox进行绑定</h2>
+			<input type="checkbox" value="goodmorning" v-model="chk" /> {{chk}}
+			<div v-if="chk">
+				<p class="alert alert-info">{{longText}}</p>
+			</div>
+			<hr />
+			<h2>和单选框进行绑定</h2>
+			<label class="label label-success"><input type="radio" value="旅游" v-model="habbit"/>旅游</label>
+			<label class="label label-danger"><input type="radio" value="逛吃" v-model="habbit" />逛吃</label>
+			<label class="label label-info"><input type="radio" value="看电影" v-model="habbit" />看电影</label>
+			<p class="alert alert-info">{{habbit}}</p>
+			<h2>过滤器,lazy、number、trim</h2>
+			<!--lazy过滤器-->
+			<input type="text" v-model.lazy="lazyValue" />
+			<p class="alert alert-warning">{{lazyValue}}</p>
+			<!--number过滤器-->
+			<input type="text" v-model.number="x" /> +
+			<input type="text" v-model.number="y" /> ={{x+y}}
+			<br />
+			<!--trim方法测试,可以在控制台进行验证-->
+			<input type="text" v-model.trim="trimValue" />
+			<p style="white-space: pre-line;">{{trimValue}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				message: "Hello World",
+				longText: "这是一段很长的文字",
+				chk: false,
+				habbit: "",
+				lazyValue: "在onChange事件的时候才会发生改变,即光标离开的时候",
+				x: 0,
+				y: 1,
+				trimValue: "  123 3345   h哈哈  "
+			}
+		})
+	</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>子父组件通信(v-on监听子组件触发的事件)</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			{{total}}
+			<!--
+				这里是子组件中调用父组件app中的 globalIncrement事件,然后
+			       在子组件中emit以下v-on后的事件名即可,此处是inc
+			-->
+			<!--v-on后面的事件务必用双引号,用单引号页会导致emit无效-->
+			<my-counter v-on:inc="globalIncrement"></my-counter>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//子组件
+		Vue.component("my-counter", {
+			template: "<button v-on:click='incrementComp'>+1</button>",
+			methods: {
+				incrementComp: function() {
+					this.$emit("inc");
+				}
+			}
+		})
+		
+		//父组件
+		var v = new Vue({
+			el: '#app',
+			data: {
+				total: 0
+			},
+			methods: {
+				globalIncrement: function() {
+					this.total++;
+				}
+			}
+		})
+	</script>
+
+</html>

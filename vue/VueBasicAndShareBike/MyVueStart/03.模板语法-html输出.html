@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js" ></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+	<body>
+		<div id="app">
+			<!--不解析传过来的html-->
+			<div class="alert alert-warning">{{htmlMessage}}</div>
+			<!--直接解析了htmlMessage传过来的html-->
+			<div class="alert alert-success" v-html="htmlMessage"></div>
+			<!--v-bind指令的使用-->
+			<div class="btn btn-success" v-bind:disabled="flag">v-bind属性测试</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v=new Vue({
+			el: "#app",
+			data: {
+				// 动态执行html非常危险,容易造成XSS跨站脚本攻击
+				htmlMessage: "<h1>Hello World</h1>",
+				flag: false
+			}
+		})
+	</script>
+</html>

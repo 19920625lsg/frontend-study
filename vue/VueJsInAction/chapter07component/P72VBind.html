@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>使用props传递数据</title>
+</head>
+<body>
+<div id="app">
+    <!--不用v-bind传递的仅仅是字符串-->
+    <my-component message="[1,2,3]"></my-component>
+    <!--用v-bind传递的才是数组-->
+    <my-component :message="[1,2,3]"></my-component>
+</div>
+<script>
+    Vue.component('my-component', {
+        // props为元素属性，用于从父组件中接受数据
+        props: ['message'],
+        // 长度可以看书传的是字符串还是数组
+        template: '<div>{{message.length}}</div>'
+    });
+
+    // 这个为my-component的父组件
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>内容分发slot</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<my-comp>
+				<h1>这是要替换掉slot的内容</h1>
+				<p>这是一段文字</p>
+			</my-comp>
+			
+			<named-comp>
+				<h1 slot="hd">这是要替换掉slot的内容</h1>
+				<p>这是一段文字</p>
+			</named-comp>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.component("my-comp", {
+			template: "<div> 这个是一个组件<slot>这个是组件的默认元素</slot></div>"
+		})
+		
+		Vue.component("named-comp", {
+			template: "<div><header><slot name='hd'></slot></header><section><slot></slot></section></div>"
+		})
+
+		var v = new Vue({
+			el: '#app'
+		})
+	</script>
+
+</html>

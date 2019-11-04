@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>计算属性按照getter和setter分开</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<input type="text" v-model="fullNM" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				firstName: "梁",
+				secondName: "山广"
+			},
+			computed: {
+				fullNM: {
+					get: function() {
+						return this.firstName + this.secondName;
+					},
+					// val代表监控的fullNM变量
+					set: function(val) {
+						var arr = val.split(' ');//姓和名用空格隔开
+						this.firstName = arr[0];
+						this.secondName = arr[1];
+					}
+				}
+			}
+		})
+	</script>
+
+</html>

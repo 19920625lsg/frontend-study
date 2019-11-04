@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>可以多选的下拉框</title>
+</head>
+<body>
+<div id="app">
+    <select v-model="selected" multiple>
+        <!--不写value默认value和标签内容一致-->
+        <option>html</option>
+        <option value="js">JavaScript</option>
+        <option>css</option>
+    </select>
+    <p>选择的项是：{{selected}}</p>
+</div>
+<script>
+    var app = new Vue({
+        // 还必须是单引号我曹
+        el: '#app',
+        data: {
+            selected: ['css', 'js']
+        }
+    })
+</script>
+
+</body>
+</html>

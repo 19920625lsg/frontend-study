@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<input type="text" v-model="text1" />
+	<br>
+	{{text1}}
+	<hr>
+	<textarea v-model="longText"></textarea>
+	<br>
+	<p style="white-space: pre-line;">
+		{{longText}}
+	</p>
+	<hr>
+	<input type="checkbox" value="goodmorning" v-model="chk">
+	<br>
+	{{chk}}
+	<div v-if="chk">
+		要显示的大段内容
+	</div>
+	<hr>
+	<label><input type="radio" v-model="hobit" value="旅游">旅游</label>
+	<label><input type="radio" v-model="hobit" value="逛吃">逛吃</label>
+	<label><input type="radio" v-model="hobit" value="看电影">看电影</label>
+	<br>
+	{{hobit}}
+	<hr>
+	<h2>修饰符</h2>
+	<input type="text" v-model.lazy="lazyvalue">
+	<br>
+	{{lazyvalue}}
+	<hr>
+	<input type="text" v-model.number="x">
+	+
+	<input type="text" v-model.number="y">
+	= {{x + y}}
+	<hr>
+	<input type="text" v-model.trim="tValue">
+	<p style="white-space: pre-line;">{{tValue}}</p>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			text1: "hello world",
+			longText: "这是一段很长的文字",
+			chk: false,
+			hobit: "",
+			lazyvalue: "init",
+			x: 0,
+			y: 0,
+			tValue: " 123"
+		}
+	})
+</script>
+</html>

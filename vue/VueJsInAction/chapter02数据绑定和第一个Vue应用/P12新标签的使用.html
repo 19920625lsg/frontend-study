@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <!--v-html可以渲染数据中的html标签-->
+    <span v-html="link"></span>
+    <!--v-pre可以跳过元素和他的子元素的编译过程-->
+    <span v-pre>{{这里的内容是不会被编译地}}</span>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            link: '<a href="#">这是一个连接</a>'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>动态组件与v-once指令</title>
+</head>
+<body>
+<div id="root">
+    <child-one v-if="type === 'child-one'"></child-one>
+    <child-two v-if="type === 'child-two'"></child-two>
+    <button @click="handleBtnChange">change</button>
+</div>
+<script>
+    Vue.component('child-one', {
+        template: '<div v-once>child-one</div>'
+    });
+    Vue.component('child-two', {
+        template: '<div v-once>child-two</div>'
+    });
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            type: 'child-one'
+        },
+        methods: {
+            handleBtnChange() {
+                this.type = this.type === 'child-one' ? 'child-two' : 'child-one'
+            }
+        }
+    });
+</script>
+</body>
+</html>

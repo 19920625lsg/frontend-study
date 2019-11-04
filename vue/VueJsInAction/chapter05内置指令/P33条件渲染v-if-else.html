@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P33条件渲染v-if-else</title>
+</head>
+<body>
+<div id="app">
+    <p v-if="status===1">当status=1时显示此行</p>
+    <p v-else-if="status===2">当status=2时显示此行</p>
+    <p v-else="status===2">否则显示此行</p>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            status: 1
+        }
+    })
+</script>
+</body>
+</html>

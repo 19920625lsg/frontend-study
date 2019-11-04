@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>基本运算</h2>
+			<p class="alert alert-info">加法:{{x+y*x}}</p>
+			<p class="alert alert-info">减法:{{x-y}}</p>
+			<p class="alert alert-info">乘法:{{x*y}}</p>
+			<p class="alert alert-info">除法:{{x/y}}</p>
+			<p class="alert alert-info">复杂:{{x+y*x-y/x}}</p>
+
+			<h2>三目运算</h2>
+			<p class="alert alert-success">{{isMan?"是男生":"是女生"}}</p>
+
+			<h2>字符串排序</h2>
+			<p class="alert alert-warning">{{str.split('').sort().join('')}}</p>
+			<p class="alert alert-warning">{{str.split('').reverse().join('')}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				x: 12,
+				y: 13,
+				isMan: false,
+				str: "abcfdge"
+			}
+		})
+	</script>
+
+</html>

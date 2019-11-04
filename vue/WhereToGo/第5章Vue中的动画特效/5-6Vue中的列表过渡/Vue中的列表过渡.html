@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中的列表过渡</title>
+    <style>
+        /*当transition不起名字的时候默认用'v-xxx'，起了名字就用'名字-xxx'*/
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <button @click="handleClick">新增</button>
+    <transition-group>
+        <div v-for="item in list" :key="item.id">{{item.title}}</div>
+    </transition-group>
+</div>
+<script>
+    let count = 0;
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            list: []
+        },
+        methods: {
+            handleClick() {
+                this.list.push({
+                    id: count++,
+                    title: 'hello world'
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

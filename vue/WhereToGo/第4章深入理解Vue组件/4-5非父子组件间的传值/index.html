@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>非父子组件间的传值</title>
+</head>
+<body>
+<div id="root">
+    <!--下面两个组件是兄弟关系-->
+    <child content="Dell"></child>
+    <child content="Lee"></child>
+</div>
+<script>
+    // 1.这样声明后(原型加上了bus)，每个接下来新建的Vue组件都会自带bus属性
+    Vue.prototype.bus = new Vue();
+
+    Vue.component('child', {
+        // 子组件的data一定要是个函数
+        data() {
+            return {
+                // 不能直接修改父组件传递过来的属性content，要不控制台会报错，要先复制一份到子组件的自定义属性然后再修改
+                childContent: this.content
+            }
+        },
+        template: '<div @click="handleClick">{{content}}</div>',
+        props: {
+            // 限定数据类型
+            content: String
+        },
+        methods: {
+            handleClick() {
+                console.log("通过bus往外传递内容啦！" + this.content);
+                // 2.通过bus属性把内容传递给另一个组件
+                this.bus.$emit('change', this.childContent);
+            }
+        },
+        // 生命周期函数
+        mounted() {
+            let _this = this;
+            // $on来监听通过bus向外触发的事件并获取携带的值，然后在回调函数里进行操作。
+            this.bus.$on('change', function (msg) {
+                // 所有组件都会收到下面订阅的消息
+                console.log("监听到Bus上的消息啦！" + msg)
+                // 注意this的自耦用于发生了变化
+                _this.childContent = msg;
+            })
+        }
+    });
+
+    let vm = new Vue({
+        el: '#root'
+    });
+</script>
+</body>
+</html>

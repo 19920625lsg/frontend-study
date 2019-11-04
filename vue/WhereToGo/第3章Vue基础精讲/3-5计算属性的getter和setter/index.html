@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>计算属性、方法与监听器</title>
+</head>
+<body>
+<div id="app">
+    <!--1.computed计算属性调用-->
+    {{fullName}}
+</div>
+<script>
+    // vue实例中的内容都用vm.$访问, 比如vm.$el,vm.$data等
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Dell',
+            lastName: 'Lee'
+        },
+        // 1.计算属性
+        computed: {
+            // 计算属性必须这么写
+            fullName: {
+                get: function () {
+                    return this.firstName + " " + this.lastName;
+                },
+                // set 方法可以在控制台用vm.fullName='lsg wr'来触发
+                set: function (value) {
+                    let arr = value.split(" ");
+                    this.firstName = arr[0];
+                    this.lastName = arr[1];
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

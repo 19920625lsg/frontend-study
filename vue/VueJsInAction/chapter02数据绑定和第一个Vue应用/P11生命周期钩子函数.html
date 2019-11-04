@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            a: 2
+        },
+        /**
+         * 实例完成后调用，此阶段完成了数据的观测等，但尚未挂载，$el还不可用，在需要初始化处理一些数据时会比较有用
+         */
+        created() {
+            // Vue实例本身也代理了data对象里的所有属性
+            console.log(this.a)
+        },
+        /**
+         * el挂载到实例上后调用，一般我们的第一个业务逻辑会在这里开启
+         */
+        mounted() {
+            // el这里是#app所在的dom元素
+            console.log(this.$el)
+        }
+    })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue实例生命周期</title>
+</head>
+<body>
+<div id="app">
+    {{content}}
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            content: 'Hello World'
+        },
+        beforeCreate() {
+            console.log('beforeCreate');
+        },
+        created() {
+            console.log("created");
+        },
+        beforeMount() {
+            console.log(this.$el);
+            console.log("beforeMount");
+        },
+        mounted() {
+            console.log(this.$el);
+            console.log("mounted");
+        },
+        // 调用vm.$destroy()的时候下面两个函数会被执行
+        beforeDestroy() {
+            console.log("beforeDestory");
+        },
+        destroyed() {
+            console.log("destroyed");
+        },
+        // 通过修改vm.content可以出发下面两个钩子函数
+        beforeUpdate() {
+            console.log("beforeUpdate");
+        },
+        updated() {
+            console.log("updated");
+        }
+
+    })
+</script>
+</body>
+</html>

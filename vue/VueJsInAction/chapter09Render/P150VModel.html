@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>利用Render函数实现类似v-model的功能</title>
+</head>
+<body>
+<div id="app">
+    <ele></ele>
+</div>
+<script>
+    Vue.component('ele', {
+        render: function (createElement) {
+            var _this = this;
+            return createElement('div', [
+                createElement('input', {
+                    dimProps: {},
+                    on: {
+                        input: function (event) {
+                            _this.value = event.target.value;
+                        }
+                    }
+                }),
+                createElement('p', 'value' + this.value)
+            ])
+        },
+        data: function () {
+            return {
+                value: ''
+            }
+        }
+    });
+
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>单个slot的使用</title>
+</head>
+<body>
+<div id="app">
+    <child-component>
+        <p>有内容了，子组件slot内的默认内容将不再呈现</p>
+    </child-component>
+</div>
+<script>
+    Vue.component('child-component', {
+        template: '\
+        <div>\
+            <slot>\
+                <p>如果父组件没有插入内容，我将作为默认内容出现</p>\
+            </slot>\
+        </div>'
+    });
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

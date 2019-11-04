@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>给组件绑定原生事件</title>
+</head>
+<body>
+<div id="app">
+    <h2>在组件上绑定的事件叫做自定义事件，需要通过$emit触发在HTML标签上绑定的实践叫原生事件，可直接触发.这个会先弹出child click,再弹出father click</h2>
+    <child @click="handleClick"></child>
+</div>
+<script>
+    Vue.component('child', {
+        template: '<div @click="handleClick">Child</div>',
+        methods: {
+            handleClick() {
+                alert("child click");
+                this.$emit('click');
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        methods: {
+            handleClick() {
+                alert('father click');
+            }
+        }
+    });
+</script>
+</body>
+</html>

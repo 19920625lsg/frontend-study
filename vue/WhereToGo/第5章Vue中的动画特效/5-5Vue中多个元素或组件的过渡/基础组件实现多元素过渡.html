@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>多个元素或组件的过渡</title>
+    <style>
+        /*当transition不起名字的时候默认用'v-xxx'，起了名字就用'名字-xxx'*/
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active, .v-leave-active {
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+
+<body>
+<div id="root">
+    <h3>无Mode，隐藏和展示同时进行</h3>
+    <transition>
+        <!--加上Key后Vue的元素复用就不会起作用了，可以正常显示动画效果-->
+        <div v-if="show" key="hello">Hello World</div>
+        <div v-else key="bye">Bye Bye</div>
+    </transition>
+    <h3>mode=in-out,先展示再隐藏</h3>
+    <transition mode="in-out">
+        <!--加上Key后Vue的元素复用就不会起作用了，可以正常显示动画效果-->
+        <div v-if="show" key="hello">Hello World</div>
+        <div v-else key="bye">Bye Bye</div>
+    </transition>
+    <h3>mode=out-in，先隐藏再展示</h3>
+    <transition mode="out-in">
+        <!--加上Key后Vue的元素复用就不会起作用了，可以正常显示动画效果-->
+        <div v-if="show" key="hello">Hello World</div>
+        <div v-else key="bye">Bye Bye</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P20计算属性之复杂运算</title>
+</head>
+<body>
+<div id="app">
+    {{prices}}
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            package1: [
+                {
+                    name: 'Mate8',
+                    price: 2799,
+                    count: 2
+                },
+                {
+                    name: 'M5',
+                    price: 1888,
+                    count: 10
+                }
+            ],
+            package2: [
+                {
+                    name: 'apple',
+                    price: 9.8,
+                    count: 32
+                },
+                {
+                    name: 'banana',
+                    price: 5.6,
+                    count: 490
+                }
+            ]
+        },
+        // 在一个计算属性中可以完成各种复杂的逻辑，包括运算和函数调用等，最终返回一个结果即可
+        computed: {
+            prices() {
+                let prices = 0
+                for (let i = 0; i < this.package1.length; i++) {
+                    prices += this.package1[i].price * this.package1[i].count
+                }
+                for (let i = 0; i < this.package2.length; i++) {
+                    prices += this.package2[i].price * this.package2[i].count
+                }
+                return prices
+            }
+        }
+    })
+    // Vue实例本身也代理了data对象里的所有属性
+    console.log(app.name)
+</script>
+</body>
+</html>

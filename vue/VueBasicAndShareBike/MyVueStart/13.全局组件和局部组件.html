@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>全局组件和局部组件,组件写法是w3c规则,小写并且包含一个短杠</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app1">
+			{{message}}
+			<first-com></first-com>
+			<child-com></child-com>
+		</div>
+		<div id="app2">
+			{{message}}
+			<first-com></first-com>
+			<!--child-com没被注册,所以此处不能被引用-->
+			<!--<child-com></child-com>-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		// 全局组件
+		Vue.component('first-com',{
+			template:'<h1>这是第一个全局组件</h1>'
+		})
+		
+		// 局部组件
+		var Child={
+			template:'<h2>这是第一个局部组件</h2>'
+		}
+		
+		var v1 = new Vue({
+			el: '#app1',
+			data: {
+				message: '第一个作用域名'
+			},
+			components: {
+				'child-com': Child
+			}
+		})
+		
+		var v2 = new Vue({
+			el: '#app2',
+			data: {
+				message: '第二个作用域名'
+			}
+		})
+	</script>
+
+</html>

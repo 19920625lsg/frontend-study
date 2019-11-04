@@ -1,0 +1,6 @@
+<mat-list>
+  <!--中括号[]代表输入；小括号()代表输出-->
+  <mat-list-item *ngFor="let book of books">
+    <a routerLink="/detail/{{book.id}}">{{book.name}}</a>
+  </mat-list-item>
+</mat-list>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<!--一般复杂的表达式都用计算属性computed替代之,尽量不用methods和watch-->
+
+		<div id="app">
+			<!-- (1) 计算属性和普通的method不同之处:
+				计算属性只有在它依赖的元素发生变化的时候才会重
+				新计算,不变的话会直接从缓存中读取;但是methid每
+				次发生重新渲染都会被调用,所以计算属性更节省带宽
+				.在组件式开发中式很有用的.
+			-->
+			<input type="text" v-model="message" />
+			<!--计算属性在调用的时候直接写reverseMSG就行,不用加(),因为reverseMSG实际是返回值-->
+			<p class="alert alert-success">{{reverseMSG}}</p>
+			<!--普通放在在调用的时候必须加(),因为这个是普通的函数-->
+			<p class="alert alert-info">{{reverseMSGMethod()}}</p>
+
+			<!--(2)计算属性和Watched的不同之处
+			      如果一个逻辑涉及到多个变量,使用Watched需要坚实多
+			      个变量,而且代码冗余.但计算属性会自动坚实所有使用
+			      到的变量,当变量改变时自动进行重新计算.
+			-->
+			<p class="alert alert-danger">{{fullName}}</p>
+			<p class="alert alert-danger">{{fullNM}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				message: "Hello World",
+				firstName: "梁",
+				secondName: "山广",
+				fullName: "梁山广",
+				age: 25,
+				gender: "male"
+			},
+			methods: {
+				reverseMSGMethod: function() {
+					console.log("这是method");
+					return this.message.split('').reverse().join('');
+				}
+			},
+			computed: {
+				//计算属性在调用的时候直接写reverseMSG就行,不用加()
+				reverseMSG: function() {
+					console.log("这是计算属性");
+					return this.message.split('').reverse().join('');
+				},
+				//计算属性相对于watch只需要写一次,明显简单地多.watch监控几个就需要写几个函数,太麻烦
+				fullNM: function() {
+					return this.firstName + this.secondName;
+				}
+			},
+			watch: {
+				// 为了完成一个姓名拼装的功能却需要写两个函数,显然太麻烦
+				//val代指所监视的变量firstName
+				firstName: function(val) {
+					this.fullName = val + this.secondName;
+				},
+				//val代指所监视的变量firstName
+				secondName: function(val) {
+					this.fullName = this.firstName + val;
+				}
+			}
+		})
+	</script>
+
+</html>

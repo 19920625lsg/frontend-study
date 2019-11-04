@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>动态绑定数据bind</title>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2">
+    <label>复选按钮</label>
+    <p>{{toggle}}</p>
+    <p>{{value1}}</p>
+    <p>{{value2}}</p>
+</div>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            toggle: false,
+            value1: 'a',
+            value2: 'b'
+        }
+    })
+</script>
+</body>
+</html>

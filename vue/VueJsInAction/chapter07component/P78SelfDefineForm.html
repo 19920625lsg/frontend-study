@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>利用v-model来创建自定义的表单输入控件</title>
+</head>
+<body>
+<div id="app">
+    <p>总数：{{total}}</p>
+    <my-component v-model="total"></my-component>
+    <button @click="handleReduce">-1</button>
+</div>
+<script>
+    Vue.component('my-component', {
+        props: ['value'],
+        template: '<input :value="value" @input="updateValue">',
+        methods: {
+            updateValue: function (event) {
+                this.$emit('input', event.target.value)
+            }
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            total: 0,
+        },
+        methods: {
+            handleReduce: function () {
+                this.total--;
+            }
+        }
+    })
+</script>
+</body>
+</html>

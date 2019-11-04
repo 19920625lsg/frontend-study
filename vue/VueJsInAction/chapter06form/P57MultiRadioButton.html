@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>单选按钮</title>
+</head>
+<body>
+<div id="app">
+    <!--冒号表示自带属性绑定data中的属性-->
+    <input type="radio" v-model="picked" value="html" id="html">
+    <label for="html">HTML</label>
+    <br>
+    <input type="radio" v-model="picked" value="js" id="js">
+    <label for="js">JavaScript</label>
+    <br>
+    <input type="radio" v-model="picked" value="css" id="css">
+    <label for="css">CSS</label>
+    <br>
+    <p>选择的项是：{{picked}}</p>
+</div>
+<script>
+    var app = new Vue({
+        // 还必须是单引号我曹
+        el: '#app',
+        data: {
+            picked: 'js'
+        }
+    })
+</script>
+
+</body>
+</html>

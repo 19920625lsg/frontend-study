@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>基础动画钩子函数讲解(离场动画leave类似，这里只讲enter)</title>
+</head>
+<body>
+<div id="root">
+    <!--@xxx-leave和xxx-enter类型的函数的讲解见README.md-->
+    <transition name="fade"
+                @before-enter="handleBeforeEnter"
+                @enter="handleEnter"
+                @after-enter="handleAfterEnter"
+    >
+        <div v-if="show">hello world</div>
+    </transition>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            },
+            // el就是指挂载的root
+            handleBeforeEnter(el) {
+                el.style.color = 'red';
+            },
+            handleEnter(el, done) {
+                setTimeout(() => {
+                    el.style.color = 'yellow';
+                    // 处理完毕用done()告诉Vue动画完成
+                    // done();
+                }, 2000);
+
+                setTimeout(() => {
+                    done();
+                }, 4000);
+
+            },
+            handleAfterEnter(el) {
+                // 执行完毕enter内的渲染，恢复为黑色
+                el.style.color = 'black';
+            }
+        }
+    });
+</script>
+</body>
+</html>

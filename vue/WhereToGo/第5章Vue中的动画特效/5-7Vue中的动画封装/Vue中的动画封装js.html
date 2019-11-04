@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue中的动画封装</title>
+</head>
+
+<body>
+<div id="root">
+    <h3>动画效果封装到了fade组件中</h3>
+    <fade :show="show">
+        <div>Hello World</div>
+    </fade>
+    <h3>封装了组件后slot内的内容就可以自己随便定义了</h3>
+    <fade :show="show">
+        <div>HelloWorld</div>
+    </fade>
+    <button @click="handleClick">切换</button>
+</div>
+<script>
+    Vue.component('fade', {
+        props: ['show'],
+        // 问题：如果在slot标签上使用v-show，程序功能是无法实现的，必须要改成v-if。
+        // 原因：slot实际上是一个抽象元素，有点类似template，本质上并不是一个元素。
+        //      而v-show是通过控制元素的display来进行显示隐藏的，slot本质上并不是元素，
+        //      所以压根也就不会有display 这个css属性。所以，slot的显示隐藏，还真得使用v-if。
+        template: `
+        <transition @before-enter=“handleBeforeEnter" @enter="handleEnter">
+            <slot v-if="show"></slot>
+        </transition>
+       `,
+        methods: {
+            handleBeforeEnter(el) {
+                el.style.color = 'red';
+            },
+            handleEnter(el, done) {
+                setTimeout(() => {
+                    el.style.color = 'blue';
+                    done();
+                }, 2000);
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#root',
+        data: {
+            show: true
+        },
+        methods: {
+            handleClick() {
+                this.show = !this.show;
+            }
+        }
+    });
+</script>
+</body>
+</html>

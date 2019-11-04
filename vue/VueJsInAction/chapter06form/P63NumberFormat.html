@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>Input懒加载</title>
+</head>
+<body>
+<div id="app">
+    <!--只有在input失焦的时候数据才更新-->
+    <input type="number" v-model.number="message">
+    <p>{{typeof message}}</p>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 123
+        }
+    })
+</script>
+</body>
+</html>

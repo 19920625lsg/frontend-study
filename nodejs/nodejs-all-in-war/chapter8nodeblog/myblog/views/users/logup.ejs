@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+    <!--引入layui-->
+    <link rel='stylesheet' href='/lib/semantic/semantic.min.css'/>
+    <link rel='stylesheet' href='/stylesheets/logup.css'/>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/semantic/semantic.min.js"></script>
+
+</head>
+<body>
+<div class="ui container">
+    <!-- HTML代码片段中请勿添加<body>标签 //-->
+    <div class="ui raised segment signin">
+        <h3 class="ui inverted blue block header"> 用户登录 </h3>
+        <div class="ui blue stacked segment">
+            <form class="ui form" method="post" action="/users/logup">
+                <div class="field">
+                    <label> 用户 </label>
+                    <div class="ui left labeled icon input">
+                        <input type="text" name="username" id="username" required>
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <label> 密码 </label>
+                    <div class="ui left labeled icon input">
+                        <input type="password" name="password" id="password" required>
+                        <i class="lock icon"></i>
+                    </div>
+                </div>
+                <button type="submit" class="ui red submit button"> 注册</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

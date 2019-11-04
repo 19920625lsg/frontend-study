@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P27class绑定过于复杂时可以用计算属性来实现</title>
+</head>
+<body>
+<div id="app">
+    <!--用计算属性classes来实现复杂的类名绑定逻辑-->
+    <div :class="classes"></div>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            error: null
+        },
+        computed: {
+            classes() {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-fail': this.error && this.error.type === 'fail'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

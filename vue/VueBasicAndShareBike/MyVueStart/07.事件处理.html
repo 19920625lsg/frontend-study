@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<h2>缩写测试</h2>
+			<div class="btn btn-success" v-on:click="sayHi">测试按钮</div>
+			<div class="btn btn-success" @click="sayHi">缩写测试按钮</div>
+			<hr />
+			<!--事件冒泡-->
+			<h2>防止事件冒泡</h2>
+			<div @click="sayHi">
+				<div class="btn btn-info" @click="sayHi">事件冒泡</div>
+				<div class="btn btn-info" @click.stop="sayHi">阻止事件冒泡</div>
+			</div>
+			<hr />
+			<h2>阻止控件的默认行为</h2>
+			<!--阻止默认行为，最常见的就是超链接-->
+			<a href="http://www.baidu.com" @click.prevent="sayHi">阻止控件的默认行为</a>
+
+			<!--事件捕获-->
+			<h2>事件捕获</h2>
+			<div @click.capture="parentSayHi">
+				<div class="btn btn-danger" @click.stop="sayHi">
+					事件捕获按钮
+				</div>
+			</div>
+			<hr />
+			<!--确保点击是在自己的身上-->
+			<h2>确保点击是在自己的身上</h2>
+			<div @click.self="sayHi" style="border: 1px solid #000;padding: 10px;">
+				<div class="btn btn-info">
+					self点击测试
+				</div>
+			</div>
+			<!--只响应一次的按钮-->
+			<h2>只响应一次的按钮</h2>
+			<div class="btn btn-warning" @click.once="sayHi">
+				按钮只能一次点击有效
+			</div>
+			<h2>按键修饰符</h2>
+			<!--事件有keyup、keydown、keypress,键有enter、delete、tab、esc、space、up、down、left、right-->
+			<input type="text" @keyup.enter="sayHi" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				message: "Hello World"
+			},
+			methods: {
+				sayHi: function() {
+					alert("Hi");
+				},
+				parentSayHi: function() {
+					alert("parent Hi");
+				}
+			}
+		})
+	</script>
+
+</html>

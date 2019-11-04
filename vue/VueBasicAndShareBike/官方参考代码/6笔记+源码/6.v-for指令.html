@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<ul>
+		<li v-for="item in messages">
+			{{item}}
+		</li>
+	</ul>
+	<hr>
+	<ul>
+		<li v-for="(item, index) in messages">
+			序号：{{index + 1}} 内容：{{item}}
+		</li>
+	</ul>
+	<hr>
+	<div>
+		<p v-for="(item, key, index) in person">序号：{{index}}---{{key}}:{{item}}</p>
+	</div>
+	<hr>
+	<span v-for="n in 10">{{n}}</span>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			messages: ["你好今天", "您好昨天", "最美的告白"],
+			person: {
+				name: "张三丰",
+				sex: "男",
+				age: 18
+			}
+		}
+	})
+</script>
+</html>

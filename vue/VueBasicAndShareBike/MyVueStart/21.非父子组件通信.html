@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>非父子组件通信</title>
+		
+		<!--可以用一个空的Vue实例作为中央事件总线-->
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	</head>
+
+	<body>
+		<div id="app1">
+			<div class="btn btn-success" @click="increment">+1</div>
+		</div>
+		<div id="app2">
+			<p class="alert alert-danger">{{total}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var bus = new Vue(); //利用空Vue实例进行中间传递,学名为"中央事件总线"
+		var v1 = new Vue({
+			el: '#app1',
+			data: {
+
+			},
+			methods: {
+				increment: function() {
+					//emit,对应下面的bus.$on事件,1对应下面的count
+					bus.$emit("inc", 1);
+				}
+			}
+		})
+
+		var v2 = new Vue({
+			el: '#app2',
+			data: {
+				total: 0
+			},
+			// mounted 是钩子函数,即立即完成
+			mounted: function() {
+				that = this;
+				//这个组件同样监听inc事件,count就是代指上面的1
+				bus.$on("inc", function(count) {
+					that.total += count;
+				})
+			}
+		})
+	</script>
+
+</html>

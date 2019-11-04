@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>列表渲染</title>
+</head>
+<body>
+<div id="app">
+    <h2>列表的基本显示</h2>
+    <div v-for="item in list">{{item}}</div>
+    <h2>带下标的列表显示</h2>
+    <div v-for="(item,index) in list">{{item+"----"+index}}</div>
+    <h2>json列表的显示</h2>
+    <div v-for="(item,index) in objList">{{"标题："+item.title+"，内容"+item.content+", 索引："+item.id}}</div>
+    <h2>若有多个循环的列表同时渲染，可以使用 template 模板占位符，该标签不会被渲染到页面</h2>
+    <template v-for="(item,index) in objList">
+        <b>{{'id: '+item.id}}</b>
+        <p>{{'姓名：'+item.title}}</p>
+        <p>{{'部门：'+item.content}}</p>
+    </template>
+    <h2>对象的循环，键值是属性名(也用了template占位符)</h2>
+    <template v-for="(item, key) in user">
+        <p> {{key+'---'+item}}</p>
+    </template>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                "Vue",
+                "Angular",
+                "React",
+                "jQuery",
+                "BootStrap"
+            ],
+            objList: [
+                {
+                    id: 379880,
+                    title: '梁山广',
+                    content: '无线'
+                },
+                {
+                    id: 379881,
+                    title: '金小小',
+                    content: '企业网'
+                },
+                {
+                    id: 379882,
+                    title: '王凯',
+                    content: '终端'
+                },
+                {
+                    id: 379883,
+                    title: '于治国',
+                    content: 'CloudBu'
+                },
+            ],
+            user: {
+                name: 'Denny',
+                age: 28,
+                gender: 'male',
+                salary: 'secret'
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>组件参数校验与非props特性</title>
+</head>
+<body>
+<div id="app">
+    <!--父组件向子组件传递数字值，如果是String会显示校验失败-->
+    <child :content="123"></child>
+</div>
+<script>
+    // 子组件
+    let child = {
+        // 父组件传递过来的属性必须用props接哈
+        props: {
+            content: {
+                // String会校验失败，Number才可以。也可以是数组[Number, String]来表示字符串或数字都可以
+                type: Number,
+                // 参数是否是必要的
+                required: false,
+                // 父组件不传content属性的时候，会把default的值作为默认值传过去
+                default: 'default value',
+                // 自定义校验器：对传入的参数进行校验
+                validator: function (value) {
+                    // content的长度大于5
+                    return (value.length > 5);
+                }
+            }
+        },
+        template: '<div>{{content}}</div>'
+    };
+    let vm = new Vue({
+        el: '#app',
+        components: {
+            child
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+	<style type="text/css">
+		.redC {
+			height: 100px;
+			width: 200px;
+			background: red;
+			transition-duration: 1s;
+		}
+		.bigger {
+			width: 300px;
+			height: 200px;
+		}
+		.bluebox {
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<div v-bind:class="{redC: isFlag, bigger: bigFlag}"></div>
+	<hr>
+	<div v-bind:class="cssObject"></div>
+	<hr>
+	<div v-bind:class="[cls1, cls2]"></div>
+	<hr>
+	<div v-bind:style="{height: ht, width: wt, background: bg}"></div>
+	<hr>
+	<div v-bind:style="[cssObj1, cssObj2]"></div>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			isFlag: true,
+			bigFlag: false,
+			cssObject: {redC: true, bigger: true},
+			cls1: "bluebox",
+			cls2: "bigger",
+			ht: "20px",
+			wt: "20px",
+			bg: "pink",
+			cssObj1: {
+				height: "50px",
+				width: "50px"
+			},
+			cssObj2: {
+				background: "blue",
+				transform: "rotate(50deg)"
+			}
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>props双向绑定</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			{{total}}
+			<!--v-on后面的事件务必用双引号,用单引号页会导致emit无效-->
+			<!--":"表示v-bind,.sync表示父子组件间可双向通信-->
+			<my-counter :t.sync="total"></my-counter>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//子组件
+		Vue.component("my-counter", {
+			//生命子组件的属性
+			props: ["t"],
+			template: "<button v-on:click='incrementComp'>+1</button>",
+			methods: {
+				incrementComp: function() {
+					//务必写上update:props中的变量才能进行双向正常更新
+					this.$emit("update:t", this.t + 1);
+				}
+			}
+		})
+
+		//父组件
+		var v = new Vue({
+			el: '#app',
+			data: {
+				total: 0
+			},
+			methods: {
+				globalIncrement: function() {
+					this.total++;
+				}
+			}
+		})
+	</script>
+
+</html>

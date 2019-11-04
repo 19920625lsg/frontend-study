@@ -1,0 +1,6 @@
+<h3>畅销书</h3>
+<mat-grid-list cols="4" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let book of books">
+    <a routerLink="/detail/{{book.id}}">{{book.name}}</a>
+  </mat-grid-tile>
+</mat-grid-list>

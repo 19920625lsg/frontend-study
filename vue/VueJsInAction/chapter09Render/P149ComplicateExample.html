@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>利用分支和for循环实现复杂的列表</title>
+</head>
+<body>
+<div id="app">
+    <ele :list="list"></ele>
+    <button @click="handleClick">显示列表</button>
+</div>
+<script>
+    Vue.component('ele', {
+        render: function (createElement) {
+            if (this.list.length) {
+                return createElement('ul', this.list.map(function (item) {
+                    return createElement('li', item);
+                }));
+            } else {
+                return createElement('p', '列表为空');
+            }
+        },
+        props: {
+            list: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: []
+        },
+        methods: {
+            handleClick: function () {
+                this.list = [
+                    '《Vue.js实战》',
+                    '《JavaScript高级程序设计》',
+                    '《JavaScript语言精粹》'
+                ];
+            }
+        }
+    })
+</script>
+</body>
+</html>

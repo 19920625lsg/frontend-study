@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>传参的点击事件</title>
+</head>
+<body>
+<div id="app">
+    点击次数:{{counter}}
+    <!--不需要传参时-->
+    <button @click="handleAdd()">+1</button>
+    <!--需要传参时-->
+    <button @click="handleAdd(10)">+10</button>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods: {
+            handleAdd(count) {
+                //||1是为了count不传
+                count = count || 1
+                this.counter += count
+            }
+        }
+    })
+</script>
+</body>
+</html>

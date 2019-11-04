@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>利用Prop属性传递对象</title>
+</head>
+<body>
+<div id="app">
+    <my-component prop-a.number='100' prop-b="abc" prop-c=false prop-d="250" prop-e="[1,2,3]"></my-component>
+</div>
+<script>
+    Vue.component('my-component', {
+        // props为元素属性，用于从父组件中接受数据
+        props: {
+            // 必须是数字类型
+            propA: Number,
+            // 必须是字符串或者数字类型
+            propB: [String, Number],
+            // 必须是布尔值，如果没有定义，默认为true
+            propC: {
+                type: Boolean,
+                default: true
+            },
+            // 必须是数字，而且必须传进来
+            propD: {
+                type: Number,
+                required: true
+            },
+            // 如果是数组或对象，默认值必须是一个函数来返回
+            propE: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            // 自定义验证函数
+            propE: {
+                validator: function (value) {
+                    return value > 10;
+                }
+            }
+        },
+        template: '<div>{{count}}</div>',
+        data: function () {
+            return {
+                count: this.propE
+            }
+        }
+    });
+
+    // 这个为my-component的父组件
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

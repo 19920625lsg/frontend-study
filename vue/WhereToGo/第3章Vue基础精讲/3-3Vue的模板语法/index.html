@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue的模板语法</title>
+</head>
+<body>
+<div id="app">
+    {{name + ' Smith'}}
+    <!--对html内容转义输出，和上面的插值表达式的作用是完全一样地,也可以进行字符串拼接 -->
+    <div v-text="name + ' Jenny'"></div>
+    <!--html内容渲染-->
+    <div v-html="name1 +'显示出来了html样式'"></div>
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'John',
+            name1: '<h1>John</h1>'
+        }
+    });
+</script>
+</body>
+</html>

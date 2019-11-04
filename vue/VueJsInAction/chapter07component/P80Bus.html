@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>非父子组件间通信(总线Bus)</title>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <component-a></component-a>
+</div>
+<script>
+    // 中央事件总线
+    var bus = new Vue();
+    Vue.component('component-a', {
+        template: '<button @click="handleEvent">传递事件</button>',
+        methods: {
+            handleEvent: function () {
+                bus.$emit('on-message', '来自组件component-a的内容')
+            }
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: ''
+        },
+        mounted: function () {
+            // 把整个实例赋过来,这里的实例this代表最外层的app
+            var _this = this;
+            // 在实例化初始化的时候，监听来自bus的事件
+            bus.$on('on-message', function (msg) {
+                _this.message = msg;
+            })
+        }
+    })
+</script>
+</body>
+</html>

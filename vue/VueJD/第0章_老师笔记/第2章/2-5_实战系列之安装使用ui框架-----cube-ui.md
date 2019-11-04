@@ -1,0 +1,7 @@
+### 第二章第五节：实战系列之安装使用ui框架-----cube-ui
+
+vuecli3.x版本安装：vue add cube-ui
+
+cube-ui:https://didi.github.io/cube-ui/#/zh-CN/docs/quick-start
+
+安装cube-ui的配置选择：https://github.com/cube-ui/cube-template/wiki

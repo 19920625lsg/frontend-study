@@ -1,0 +1,38 @@
+/***********************************************************
+* @Description : 
+* @author      : 梁山广
+* @date        : 2017/12/3 18:35
+* @email       : liangshanguang2@gmail.com
+***********************************************************/
+.ui.inverted.blue.header, .ui.header{
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.ui.vertical.divider {
+    margin: 0 4px;
+}
+
+.ui.raised.segment {
+    background-color: #ccc;
+    width: 600px;
+    margin-top: 0;
+    position: center;
+    left: 10px;
+    top: 10px;
+    font-family: 'microsoft yahei' ,Arial,sans-serif;
+}
+
+.ui.linkedin, .ui.facebook{
+    font-size:14px;
+    font-weight: normal;
+}
+
+.footer {
+    text-align: right;
+    font-size:12px;
+}
+
+.text {
+    display: inline;
+}

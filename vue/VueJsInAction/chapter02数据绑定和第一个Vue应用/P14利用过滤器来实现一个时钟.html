@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    {{date | formDate}}
+</div>
+<script>
+    /**
+     * 在月份、日期、小时等小于10的时候再前面补0
+     * @param value
+     */
+    let padDate = function (value) {
+        return value < 10 ? '0' + value : value
+    }
+    let app = new Vue({
+        el: '#app',
+        data: {
+            date: new Date()
+        },
+        // 自定义过滤器，过滤器的用法是在差值后面用|连接起来
+        filters: {
+            /**
+             * 把传入的日期进行格式化成yyyy-MM-dd HH:mm:ss的形式
+             * @param value 传入的其他格式的日期值
+             */
+            formDate(value) {
+                let date = new Date(value)
+                let year = date.getFullYear()
+                let month = padDate(date.getMonth() + 1)
+                let day = padDate(date.getDate())
+                let hours = padDate(date.getHours())
+                let minutes = padDate(date.getMinutes())
+                let seconds = padDate(date.getSeconds())
+
+                //将整理好的数据发回去
+                return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+            }
+        },
+        /**
+         * 钩子函数:el挂载到实例上后调用，一般我们的第一个业务逻辑会在这里开启
+         */
+        mounted() {
+            let _this = this
+            this.timer = setInterval(function () {
+                // 修改数据date
+                _this.date = new Date()
+            }, 1000)
+        },
+        /**
+         * 钩子函数:实例销毁之前调用。主要解绑一些使用addEventListener监听的事件等
+         */
+        beforeDestroy() {
+            if (this.timer) {
+                clearInterval(this.timer)
+            }
+        }
+    })
+</script>
+</body>
+</html>

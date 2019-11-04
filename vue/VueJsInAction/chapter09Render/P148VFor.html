@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>在Render函数中用for循环来代替v-for</title>
+</head>
+<body>
+<div id="app">
+    <ele :list="list"></ele>
+</div>
+<script>
+    Vue.component('ele', {
+        render: function (createElement) {
+            var nodes = [];
+            for (var i = 0; i < this.list.length; i++) {
+                nodes.push(createElement('p', this.list[i]));
+            }
+            return createElement('div', nodes);
+        },
+        props: {
+            list: {
+                type: Array
+            }
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: [
+                '《Vue.js实战》',
+                '《JavaScript高级程序设计》',
+                '《JavaScript语言精粹》'
+            ]
+        }
+    })
+</script>
+</body>
+</html>

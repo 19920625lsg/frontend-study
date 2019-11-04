@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<button v-on:click="sayHi">测试</button>
+	<button @click="sayHi">缩写测试</button>
+	<div v-on:click="sayHi">
+		<button v-on:click.stop="sayHi">阻止冒泡</button>
+	</div>
+	<a href="https://www.baidu.com" @click.prevent="sayHi" >百度跳转</a>
+	<div v-on:click.capture="parentSay">
+		<button v-on:click.stop="sayHi">事件捕获</button>
+	</div>
+	<div v-on:click.self="sayHi" style="border: 1px solid #000; padding: 20px;">
+		<button>self测试</button>
+	</div>
+	<button @click.once="sayHi">once只触发一次</button>
+	<hr>
+	<h2>按键修饰符</h2>
+	<input type="text" @keyup.enter="submit">
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		methods: {
+			sayHi: function(){
+				alert("Hi");
+			},
+			parentSay: function() {
+				alert("parents say hi");
+			},
+			submit: function() {
+				alert("提交完成");
+			}
+		}
+	})
+</script>
+</html>

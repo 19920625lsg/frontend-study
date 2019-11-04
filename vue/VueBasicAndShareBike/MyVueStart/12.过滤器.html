@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>过滤器学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<input type="text" v-model="message" />
+			<p class="alert alert-info">{{message|capitalize|reverse}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: '#app',
+			data: {
+				message: 'good'
+			},
+			// Vue因该有自定义的过滤器吧
+			filters: {
+				// 监控captialize左边的变量,"变量|过滤器"会将左边的变量传给右边的过滤器的
+				capitalize: function(val) {
+					//注意是toUpperCase而不是upperCase
+					return val.charAt(0).toUpperCase() + val.slice(1); //将首字母大写
+				},
+				//逆序的过滤器
+				reverse: function(val) {
+					return val.split('').reverse().join('');
+				}
+			}
+		});
+	</script>
+
+</html>

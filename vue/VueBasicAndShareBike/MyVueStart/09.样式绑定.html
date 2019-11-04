@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue学习</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+	</head>
+	<style type="text/css">
+		.redC {
+			height: 100px;
+			width: 200px;
+			background: red;
+			transition-duration: 1s;
+		}
+		/*各个css样式之间千万不要加逗号!!*/
+		
+		.bigger {
+			height: 200px;
+			width: 300px;
+			background: blue;
+		}
+	</style>
+
+	<body>
+		<div id="app">
+			<h2>通过类名实现渐变,键值对的键值表示data里的变量</h2>
+			<div :class="{redC:isFlag,bigger:bigFlag}"></div>
+			<hr />
+			<h2>直接放对象,就行不是键值对就不要再加大括号了</h2>
+			<div :class="cssObject"></div>
+			<hr />
+			<h2>直接写类,多个用中括号</h2>
+			<div :class="[cls1,cls2]"></div>
+			<hr />
+			<h2>样式可以直接绑定变量的</h2>
+			<div :style="{height: ht, width: wd, background: bg}"></div>
+			<hr />
+			<h2>样式也是可以直接绑定对象的(一般就是data里的JSON对象)</h2>
+			<div :style="[cssObj1,cssObj2]"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var v = new Vue({
+			el: "#app",
+			data: {
+				isFlag: true,
+				bigFlag: false,
+				cssObject: {
+					redC: true,
+					bigger: false
+				},
+				cls1: "redC",
+				cls2: "bigger",
+				ht: "100px",
+				wd: "100px",
+				bg: "pink",
+				cssObj1: {
+					height: "66px",
+					width: "66px"
+				},
+				cssObj2: {
+					background: "green",
+					transform: "rotate(50deg)"
+				}
+			}
+		})
+	</script>
+
+</html>

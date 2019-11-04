@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>作用域插槽用在列表组件</title>
+</head>
+<body>
+<div id="app">
+    <my-list :books="books">
+        <!--作用域插槽也可以是具名的slot,这里是绑定子组件中名字为name的插槽-->
+        <template slot="book" scope="props">
+            <li>{{props.bookName}}</li>
+        </template>
+    </my-list>
+
+</div>
+<script>
+    Vue.component('my-list', {
+        props: {
+            books: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        },
+        template: '\
+            \<ul>\n' +
+        '        <slot name="book" v-for="book in books" :book-name="book.name">\n' +
+        '            <!--这里可以写默认的slot内容-->\n' +
+        '        </slot>\n' +
+        '    </ul>\
+        '
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {
+                    name: '《Vue.js实战》'
+                },
+                {
+                    name: '《JavaScript语言精粹》'
+                },
+                {
+                    name: '《JavaScript高级程序设计》'
+                }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

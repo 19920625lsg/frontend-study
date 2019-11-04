@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P16指令之v-on的使用</title>
+</head>
+<body>
+<div id="app">
+    <p v-if="show">显示这段文本</p>
+    <p v-if="!show">不显示这段文本</p>
+    <!--绑定事件-->
+    <button @click="handleToggle">点击取反</button>
+    <!--也可以直接写语句，不过不推荐这么做,如果要写复杂的业务逻辑，建议还是在methods里声明一个方法或者用computed计算属性来做-->
+    <button @click="show=!show">点击取反</button>
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        },
+        methods: {
+            handleToggle() {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

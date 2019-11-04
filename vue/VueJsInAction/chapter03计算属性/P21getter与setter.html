@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>P21getter与setter</title>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+</div>
+<script>
+    let app = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Jack',
+            lastName: 'Green'
+        },
+        computed: {
+            fullName: {
+                // getter,读取时触发
+                get() {
+                    return this.firstName + ' ' + this.lastName
+                },
+                // setter,写入时触发
+                set(newValue) {
+                    let names = newValue.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[names.length - 1]
+                }
+            }
+        }
+    })
+    // Vue实例本身也代理了data对象里的所有属性
+    console.log(app.name)
+</script>
+</body>
+</html>

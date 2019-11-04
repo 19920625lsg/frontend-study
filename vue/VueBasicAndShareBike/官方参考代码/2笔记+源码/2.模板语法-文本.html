@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<div>{{message}}</div>
+	<div v-once>只描绘一次：{{message}}</div>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			message: "你好世界!"
+		}
+	})
+</script>
+</html>

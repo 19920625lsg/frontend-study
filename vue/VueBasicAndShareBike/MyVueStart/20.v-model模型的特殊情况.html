@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>v-mode的特殊情况</title>
+		<script type="text/javascript" src="lib/vue/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<my-check v-model="checked"></my-check>
+			{{checked}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.component("my-check", {
+			template: "<input type='checkbox' :checked='chk' @change='$emit(\"change\",$event.target.checked)'/>",
+			model: {
+				prop: "chk",
+				ecent: "change"
+			},
+			props: {
+				chk: Boolean
+			}
+		})
+
+		var v = new Vue({
+			el: '#app',
+			data: {
+				checked: true
+			}
+		})
+	</script>
+
+</html>

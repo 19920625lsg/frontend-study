@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/vue.js"></script>
+    <title>组件高级用法：递归组件</title>
+</head>
+<body>
+<div id="app">
+    <child-component :count="1"></child-component>
+</div>
+<script>
+    Vue.component('child-component', {
+        name: 'child-component',
+        props: {
+            count: {
+                type: Number,
+                default: 1
+            }
+        },
+        template: '\
+        <div class="child">\n' +
+        '    <child-component :count="count + 1" v-if="count < 3 "></child-component>\n' +
+        '</div>\
+                '
+    });
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+</body>
+</html>

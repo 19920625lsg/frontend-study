@@ -1,0 +1,12 @@
+<div *ngIf="book">
+  <h2>{{book.name | uppercase}} Details</h2>
+  <div class="example-container">
+    <mat-form-field>
+      <input id="inputBookId" matInput [(ngModel)]="book.id" placeholder="id" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input id="inputBookName" matInput [(ngModel)]="book.name" placeholder="name">
+    </mat-form-field>
+  </div>
+</div>
+<button mat-button color="primary" (click)="goBack()">返回</button>

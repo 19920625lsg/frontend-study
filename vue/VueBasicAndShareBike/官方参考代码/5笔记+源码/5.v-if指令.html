@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<p v-if="flag">这是一个测试v-if指令的节点</p>
+	<p v-if="level === 1">这是管理员</p>
+	<p v-else-if="level === 2">这是普通用户</p>
+	<p v-else>对不起您没有权限</p>
+	<hr>
+	<p v-show="level === 1">这是管理员</p>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			flag: false,
+			level: 1
+		}
+	})
+</script>
+</html>

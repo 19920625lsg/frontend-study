@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<div>{{message}}</div>
+	<div v-once>只描绘一次：{{message}}</div>
+	<hr>
+	<div>{{htmlMsg}}</div>
+	<div v-html="htmlMsg"></div>
+
+	<hr>
+	<button v-bind:disabled="flag">按钮</button>
+
+	<hr>
+	<p>加法的结果是：{{x + y}}</p>
+	<p>{{ isMan ? "男生" : "女生"}}</p>
+	<p> {{strText.split('').reverse().join('')}}</p>
+</div>
+</body>
+<script type="text/javascript">
+	var v = new Vue({
+		el: "#app",
+		data: {
+			message: "你好世界!",
+			htmlMsg: "<h1>我是新来的，请多关照！！！</h1><input type='text'>",
+			flag: true,
+			x: 12,
+			y: 13,
+			isMan: true,
+			strText: "abcdefg"
+		}
+	})
+</script>
+</html>
