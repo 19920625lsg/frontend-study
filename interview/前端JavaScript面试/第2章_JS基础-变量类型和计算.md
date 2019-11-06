@@ -49,7 +49,9 @@ const u =Symbol('s')//es6新增Symbol类型
   function fn() {} //特殊引用类型，不用于存储数据，所以没有“拷贝、赋值函数”一说，其实函数类型可以归为第5类，即函数类型
   ```
 
-### 五、typeof运算符
+## 2.2 typeof和深拷贝
+
+### typeof运算符
 
 + 识别所有值类型
   ```javascript
@@ -71,7 +73,7 @@ const u =Symbol('s')//es6新增Symbol类型
   typeof({ x: 100 }) // object
   ```
 
-### 六、浅拷贝和深拷贝
+### 浅拷贝和深拷贝
 
 #### 什么是对象的拷贝
 
@@ -192,9 +194,9 @@ console.log(p1.dog); // wc
 + 默认情况下一个对象的属性如果是基本数据类型，那么都是深拷贝(Object.assign)
 + 如果对象的数据包含了引用数据类型，才真正地区分深拷贝和浅拷贝
 
-### 知识点--变量计算
+## 2.3 变量计算
 
-#### 字符串拼接
+### 字符串拼接
 
 ```javascript
 const a = 100 + 10; // 110
@@ -202,7 +204,7 @@ const b = 100 + '10' // '10010'
 const c = true + '10' // 'true10'
 ```
 
-#### ==运算符
+### ==运算符
 
 ```javascript
 100 == '100' // true
@@ -224,7 +226,7 @@ if(obj.a == null){}
 if(obj.a === null || obj.a === undefined){}
 ```
 
-#### if语句和逻辑运算(truly变量和falsely变量)
+### if语句和逻辑运算(truly变量和falsely变量)
 
 + truly变量：`!!a === true`的变量,即默认值可以当成true的变量
 + falsely变量：`!!a === false`变量，即默认值可以当成false的变量
