@@ -71,9 +71,126 @@ const u =Symbol('s')//es6新增Symbol类型
   typeof({ x: 100 }) // object
   ```
 
-### 六、深拷贝
+### 六、浅拷贝和深拷贝
 
+#### 什么是对象的拷贝
 
+将一个对象赋值给另外一个对象，我们称之为对象的拷贝
+
+#### 浅拷贝
+
+> 将A对象赋值给B对象，修改B独享的属性和方法会影响A对象的属性和方法，我们称之为浅拷贝
+
+```javascript
+    function Person(name, age, dog) {
+     this.name = name;
+     this.age = age;
+     this.say = function () {
+         console.log(this.name, this.age);
+     };
+     this.dog = dog;
+ }
+ var p1 = new Person("luodou", 13, {
+     name: "wc",
+     age: "3"
+ });
+
+ // 1.对象之间的直接赋值
+ /*
+ // 将p1对象赋值给p2对象
+ // 本质上是p1和p2都指向了同一块存储空间
+ // 所以无论是修改p1还是p2都会影响到另外一个
+ // 所以下列代码是浅拷贝
+ var p2 = p1;
+ console.log(p1.name);
+ p2.name = "zq";
+ console.log(p1.name);
+ */
+
+ // 2.对象属性的逐一赋值
+ var p2 = new Person();
+
+ copy(p1, p2);
+ function copy(o1, o2){
+     for(var key in o1){
+         o2[key] = o1[key];
+     }
+ }
+
+ console.log(p2);
+
+ console.log(p1.dog.name);  //wc
+ p1.dog.name = "mm";
+ console.log(p1.dog.name);  //mm
+```
+
+#### 深拷贝
+
+> 将A对象赋值给B对象，修改B对象的属性和方法不会影响到A对象的属性和方法，我们称之为深拷贝
+
+```javascript
+function Person(name, age, dog) {
+    this.name = name;
+    this.age = age;
+    this.say = function () {
+        console.log(this.name, this.age);
+    };
+    this.dog = dog;
+}
+// var p1 = new Person("lnj", 13, {
+//     name: "wc",
+//     age: "3"
+// });
+var p1 = new Person("lnj", 13,{
+    name: "wc",
+    age: "3"
+});
+/*
+//若传入的是数组也一样，数组也是对象
+    var p1 = new Person("lnj", 13,[1,3,5]);
+    */
+var p2 = new Person();
+
+function deepCopy(o1, o2){
+    // 取出第一个对象的每一个属性
+    for(var key in o1){
+        // 取出第一个对象当前属性对应的值
+        var item = o1[key]; // dog
+        // 判断当前的值是否是引用类型
+        // 如果是引用类型, 我们就重新开辟一块存储空间
+        if(item instanceof Object){
+            var temp = new Object();
+            /*
+            {name: "wc",age: "3"}
+                */
+            deepCopy(item, temp);   //递归
+            o2[key] = temp;
+        }else{
+            // 基本数据类型
+            o2[key] = o1[key];
+        }
+    }
+}
+
+deepCopy(p1, p2);
+console.log(p1.dog.name); // wc
+p2.dog.name = "mm";
+console.log(p1.dog.name); // wc
+
+/*
+deepCopy(p1, p2);
+console.log(p1.dog); // wc
+p2.dog = [2,4,6];
+console.log(p2);
+console.log(p1.dog); // wc
+    */
+```
+
+#### 深拷贝和浅拷贝的注意事项
+
++ 默认情况下对象之间的直接赋值都是浅拷贝
++ 默认情况下一个对象的属性如果是基本数据类型，那么都是深拷贝(Object.assign)
++ 如果对象的数据包含了引用数据类型，才真正地区分深拷贝和浅拷贝
 
 ### 知识点--变量计算
 
