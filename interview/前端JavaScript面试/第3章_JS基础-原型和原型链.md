@@ -14,4 +14,31 @@
 + 类型判断`instanceof`
 + 原型和原型链
 
-## 3.2 class和继承
+## 3.2 类和继承
+
+### 类
+
+```javascript
+class Student {
+    constructor(name, number) {
+        this.name = name;
+        this.number = number
+    }
+
+    sayHi() {
+        console.log(`${this.name}, 学号 ${this.number}`)
+    }
+}
+
+// 通过类new对象/实例
+const rose = new Student('Rose', 20, '男');
+console.log(rose.name);
+console.log(rose.number);
+rose.sayHi();
+```
+
+### 继承
+
++ extends
++ super
++ 扩展或重写方法
