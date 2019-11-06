@@ -121,7 +121,7 @@ console.log(Student.prototype); // Student {}
 console.log(rose.__proto__ === Student.prototype); // true
 ```
 原型图示如下：
-![隐式原型和显示原型](https://img.mukewang.com/szimg/5dc285d60001568e19201080.jpg)
+![隐式原型和显示原型](images/3_3_原型.jpg)
 
 ### 原型关系
 
@@ -139,17 +139,17 @@ console.log(rose.__proto__ === Student.prototype); // true
 
 ### 原型链图示
 
-![原型链](https://img.mukewang.com/szimg/5dc2888600010e1219201080.jpg)
+![原型链](images/3_4_原型链.jpg)
 
 ### 原型链验证
 
-![原型链验证](https://img.mukewang.com/szimg/5dc289da0001bcb219201080.jpg)
+![原型链验证](images/3_4_原型链验证.jpg)
 
 ### 复杂的原型链
 
-![复杂的原型链](https://img.mukewang.com/szimg/5dc2918c00012a2819201080.jpg)
+![复杂的原型链](images/3_5_复杂的原型链.jpg)
 
-原型链网上找能找到，instanceof就是true
+原型链往上找能找到，instanceof就是true
 
 ### 重要提示
 
