@@ -99,7 +99,7 @@ wang.eat();
 
 接着上面的代码，执行
 
-```
+```javascript
 // 类型判断
 console.log(xialuo  instanceof Student); // true
 console.log(xialuo  instanceof People); // true
@@ -134,3 +134,41 @@ console.log(rose.__proto__ === Student.prototype); // true
 + 获取属性xialuo.name或者执行方法xialuo.sayHi()时
 + 先在自身属性和方法中寻找
 + 如果找不到则自动去`__proto__`中查找
+
+## 3.4 原型链和instanceof
+
+### 原型链图示
+
+![原型链](https://img.mukewang.com/szimg/5dc2888600010e1219201080.jpg)
+
+### 原型链验证
+
+![原型链验证](https://img.mukewang.com/szimg/5dc289da0001bcb219201080.jpg)
+
+### 复杂的原型链
+
+![复杂的原型链](https://img.mukewang.com/szimg/5dc2918c00012a2819201080.jpg)
+
+原型链网上找能找到，instanceof就是true
+
+### 重要提示
+
++ class是ES6语法规范，由ECMA委员会发布
++ ECMA只规定语法规则，即我们代码的书写规范，不规定如何实现
++ 以上实现方式都是V8引擎的实现方式，也是主流的
+
+## 3.5 问题解答和汇总
+
+### 如何准确判断一个变量是不是数组？
+
+```javascript
+a instanceof Array
+```
+
+### class的原型本质
+
++ 原型和原型链的图示
++ 属性和方法的执行规则
+
+### 手写简单的jQuery，考虑插件和扩展性
+
