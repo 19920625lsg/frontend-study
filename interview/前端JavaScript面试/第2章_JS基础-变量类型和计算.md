@@ -147,8 +147,8 @@ var p1 = new Person("lnj", 13,{
 });
 /*
 //若传入的是数组也一样，数组也是对象
-    var p1 = new Person("lnj", 13,[1,3,5]);
-    */
+var p1 = new Person("lnj", 13,[1,3,5]);
+*/
 var p2 = new Person();
 
 function deepCopy(o1, o2){
@@ -183,7 +183,7 @@ console.log(p1.dog); // wc
 p2.dog = [2,4,6];
 console.log(p2);
 console.log(p1.dog); // wc
-    */
+*/
 ```
 
 #### 深拷贝和浅拷贝的注意事项
@@ -210,4 +210,167 @@ const c = true + '10' // 'true10'
 0 == false // true
 false == '' // true
 null == undefined // true
+```
+
+除了`==null`之外，其他一律用`===`,例如：
+
+```javascript
+const obj = { x: 100 }
+if(obj.a == null){}
+```
+相当于：
+
+```javascript
+if(obj.a === null || obj.a === undefined){}
+```
+
+#### if语句和逻辑运算(truly变量和falsely变量)
+
++ truly变量：`!!a === true`的变量,即默认值可以当成true的变量
++ falsely变量：`!!a === false`变量，即默认值可以当成false的变量
+
+> 以下是falsely变量，除此以外都是truly变量
+
+```javascript
+!!0 === false
+!!NaN === false
+!!'' === false
+!!null === false
+!!undefined === false
+!!false === false
+```
+
+下面是truly变量例子
+```javascript
+const a = true
+if(a){
+    // ......
+}
+
+const b = 100
+if(b) {
+    // ......
+}
+```
+
+下面是falsely变量
+
+```javascript
+const c = ''
+if(c){
+    // ......
+}
+
+const d = null
+if(d) {
+    // ...
+}
+let e;
+if(e){
+    //......
+}
+```
+
+下面是一些特殊的例子
+
+```javascript
+console.log(10 && 0) // 0
+console.log('' || 'abc') // 'abc'
+console.log(!window.abc) // true
+```
+
+## 2.4 题目解决
+
+### typeof能判断哪些类型
+
++ 识别所有值类型
++ 识别函数
++ 判断是否是引用类型(不可再细分)
+
+### 何时使用===，何时使用==
+
+```javascript
+// 除了`==null`之外，其他一律用`===`,例如：
+const obj = { x: 100 }
+if(obj.a == null){}
+// 相当于：
+if(obj.a === null || obj.a === undefined){}
+```
+
+### 值类型和引用类型的区别
+
+> 赋值后修改赋值后对象是否影响原来的对象，深拷贝和浅拷贝这里要注意下。
+
+```javascript
+const obj1 = { x:100, y:200 }
+const obj2 = obj1
+let x1 = obj1.x
+obj2.x = 101
+x1 = 102
+console.log(obj1) // { x: 101, y: 200 }
+```
+
+### 手写深拷贝
+
++ 注意判断值类型和引用类型，值类型直接赋值即可，引用类型需要递归取属性赋值
++ 注意判断是数组还是对象
+
+代码如下：
+
+```javascript
+function Person(name, age, dog) {
+    this.name = name;
+    this.age = age;
+    this.say = function () {
+        console.log(this.name, this.age);
+    };
+    this.dog = dog;
+}
+// var p1 = new Person("lnj", 13, {
+//     name: "wc",
+//     age: "3"
+// });
+var p1 = new Person("lnj", 13,{
+    name: "wc",
+    age: "3"
+});
+/*
+//若传入的是数组也一样，数组也是对象
+var p1 = new Person("lnj", 13,[1,3,5]);
+*/
+var p2 = new Person();
+
+function deepCopy(o1, o2){
+    // 取出第一个对象的每一个属性
+    for(var key in o1){
+        // 取出第一个对象当前属性对应的值
+        var item = o1[key]; // dog
+        // 判断当前的值是否是引用类型
+        // 如果是引用类型, 我们就重新开辟一块存储空间
+        if(item instanceof Object){
+            var temp = new Object();
+            /*
+            {name: "wc",age: "3"}
+                */
+            deepCopy(item, temp);   //递归
+            o2[key] = temp;
+        }else{
+            // 基本数据类型
+            o2[key] = o1[key];
+        }
+    }
+}
+
+deepCopy(p1, p2);
+console.log(p1.dog.name); // wc
+p2.dog.name = "mm";
+console.log(p1.dog.name); // wc
+
+/*
+deepCopy(p1, p2);
+console.log(p1.dog); // wc
+p2.dog = [2,4,6];
+console.log(p2);
+console.log(p1.dog); // wc
+*/
 ```
