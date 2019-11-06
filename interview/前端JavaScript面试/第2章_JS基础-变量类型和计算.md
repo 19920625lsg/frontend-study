@@ -82,13 +82,13 @@ const u =Symbol('s')//es6新增Symbol类型
 > 将A对象赋值给B对象，修改B独享的属性和方法会影响A对象的属性和方法，我们称之为浅拷贝
 
 ```javascript
-    function Person(name, age, dog) {
-     this.name = name;
-     this.age = age;
-     this.say = function () {
-         console.log(this.name, this.age);
-     };
-     this.dog = dog;
+function Person(name, age, dog) {
+    this.name = name;
+    this.age = age;
+    this.say = function () {
+        console.log(this.name, this.age);
+    };
+    this.dog = dog;
  }
  var p1 = new Person("luodou", 13, {
      name: "wc",
@@ -194,3 +194,20 @@ console.log(p1.dog); // wc
 
 ### 知识点--变量计算
 
+#### 字符串拼接
+
+```javascript
+const a = 100 + 10; // 110
+const b = 100 + '10' // '10010'
+const c = true + '10' // 'true10'
+```
+
+#### ==运算符
+
+```javascript
+100 == '100' // true
+0 == '' // true
+0 == false // true
+false == '' // true
+null == undefined // true
+```
