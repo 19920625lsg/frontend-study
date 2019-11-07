@@ -230,4 +230,4 @@ c.set('a', 100);
 
 ## 4.6 原型中的this
 
-![原型中的this](https://img.mukewang.com/szimg/5dc3b9b20001da7819201080.jpg)
+![原型中的this](images/4_6_原型中的this.jpg)

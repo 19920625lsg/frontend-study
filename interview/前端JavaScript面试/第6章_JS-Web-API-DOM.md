@@ -54,11 +54,11 @@
 
 ### DOM操作示例
 +  1.获取DOM节点
-  > ![获取DOM节点](https://img.mukewang.com/szimg/5dc3eb650001d31519201080.jpg)
+  > ![获取DOM节点](images/6_3_获取DOM节点.jpg)
 +  2.property操作
-  > ![property](https://img.mukewang.com/szimg/5dc3ec990001dac019201080.jpg)
+  > ![property](images/6_3_property操作.jpg)
 + 3.attribute操作
-  > ![attribute](https://img.mukewang.com/szimg/5dc3ece30001cb5f19201080.jpg)
+  > ![attribute](images/6_3_attribute操作.jpg)
 
 ### DOM示例代码 `dom.html`和`dom.js`
 
@@ -155,6 +155,6 @@ div1.appendChild(p2);
 
 + DOM操作非常昂贵，避免频繁的DOM操作
 + 对DOM查询做缓存
-  > ![对DOM查询做缓存](https://img1.sycdn.imooc.com/szimg/5dc40ee90001313b19201080.jpg)
+  > ![对DOM查询做缓存](images/6_5_对DOM查询做缓存.jpg)
 + 将频繁操作改为一次操作
-  > ![将频繁操作改为一次操作](https://img.mukewang.com/szimg/5dc411690001e3a719201080.jpg)
+  > ![将频繁操作改为一次操作](images/6_5_将频繁操作改为一次操作.jpg)

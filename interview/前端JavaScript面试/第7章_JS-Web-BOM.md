@@ -16,8 +16,8 @@
 
 ### navigator和screen
 
-![navigator和screen](https://img.mukewang.com/szimg/5dc4160200016faf19201080.jpg)
+![navigator和screen](images/7_1_navigator和screen.jpg)
 
 ### location和history
 
-![location和history](https://img.mukewang.com/szimg/5dc4161d00013e5019201080.jpg)
+![location和history](images/7_1_location和history.jpg)
