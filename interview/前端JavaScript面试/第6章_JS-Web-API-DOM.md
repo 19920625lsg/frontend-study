@@ -46,23 +46,21 @@
 
 ## 6.3 DOM节点操作
 
+### DOM操作分类
 + 获取DOM节点
 + property
 + attribute
 
-### 1.获取DOM节点
 
-![获取DOM节点](https://img.mukewang.com/szimg/5dc3eb650001d31519201080.jpg)
+### DOM操作示例
++  1.获取DOM节点
+  > ![获取DOM节点](https://img.mukewang.com/szimg/5dc3eb650001d31519201080.jpg)
++  2.property操作
+  > ![property](https://img.mukewang.com/szimg/5dc3ec990001dac019201080.jpg)
++ 3.attribute操作
+  > ![attribute](https://img.mukewang.com/szimg/5dc3ece30001cb5f19201080.jpg)
 
-### 2.property操作
-
-![property](https://img.mukewang.com/szimg/5dc3ec990001dac019201080.jpg)
-
-### 3.attribute操作
-
-![attribute](https://img.mukewang.com/szimg/5dc3ece30001cb5f19201080.jpg)
-
-### DOM操作 `dom.html`和`dom.js`
+### DOM示例代码 `dom.html`和`dom.js`
 
 > dom.html
 
@@ -129,3 +127,7 @@ p.getAttribute('style');
 p.setAttribute('style', 'font-size:30px');
 ```
 
+### property和attribute
++ property:修改对象属性，不会体现到html结构中
++ attribute:修改html属性，会改变html结构
++ 两者都可能引起DOM重新渲染
