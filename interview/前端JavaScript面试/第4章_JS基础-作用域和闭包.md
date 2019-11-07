@@ -207,3 +207,27 @@ const fn3 = fn1.bind1({x: 100}, 10, 20, 30);
 const res2 = fn3();
 console.log(res2);
 ```
+
+### 闭包的作用
+
+```javascript
+// 闭包可以隐藏数据，只提供API。闭包可以理解为面向对象中的封装(此外还有继承和多态)
+function createCache() {
+    const data = {}; // 闭包中的数据，被隐藏，不被外界访问,只提供getter和setter让外界访问指定键值对
+    return {
+        set: function (key, val) {
+            data[key] = val
+        },
+        get: function (key) {
+            return data[key];
+        }
+    }
+}
+
+const c = createCache();
+c.set('a', 100);
+```
+
+## 4.6 原型中的this
+
+![原型中的this](https://img.mukewang.com/szimg/5dc3b9b20001da7819201080.jpg)
