@@ -81,7 +81,7 @@ print(fn); // 打印100
 function fn1() {
     console.log(this);
 }
-// 场景1.作为普通函数
+// 场景1.作为普通函数,直接返回window对象
 fn1(); // window对象
 // 场景2.使用call apply bind
 fn1.call({x: 100}); // { x: 100 })  使用call直接运行,call是的this的作用域变了
@@ -172,4 +172,38 @@ const zhangsan = new Student('张三', 20, '男');
 console.log(zhangsan.name);
 console.log(zhangsan.number);
 zhangsan.sayHi();
+```
+
+## 4.4 问题解答
+
+### 自己实现bind函数
+
+```javascript
+function fn1(a, b, c) {
+    console.log('this', this);
+    console.log(a, b, c);
+    return 'this is fn1';
+}
+
+// 第一个参数相当于绑定了this指向的对象
+const fn2 = fn1.bind({x: 100}, 10, 20, 30);
+const res = fn2();
+console.log(res);
+
+// 模拟bind
+Function.prototype.bind1 = function () {
+    // 将参数拆解为数组
+    const args = Array.prototype.slice.call(arguments);
+
+    // 获取this(取数组第一项)
+    const t = args.shift();
+    // fn1.bind(xxx)中的fn1
+    const self = this;
+    return function () {
+        return self.apply(t, args)
+    }
+};
+const fn3 = fn1.bind1({x: 100}, 10, 20, 30);
+const res2 = fn3();
+console.log(res2);
 ```
