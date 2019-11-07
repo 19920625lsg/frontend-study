@@ -67,3 +67,49 @@ console.log(300);
 + 异步不会阻塞代码执行
 + 同步会阻塞代码执行
 
+## 5.2 应用场景
+
++ 网络请求，如ajax请求、图片加载
++ 定时任务，如setTimeout
+
+### 网络请求，如ajax请求、图片加载
+
+```javascript
+// ajax请求
+console.log('start')
+$.get('./data1.json', function(data1){
+    console.log(data1)
+})
+console.log('end')
+```
+
+```javascript
+// 图片加载
+console.log('start')
+let img = document.createElement('img')
+img.onload = function(){
+    console.log('loaded')
+}
+img.src = './xxx.png'
+console.log('end')
+```
+
+### 定时任务，如setTimeout(一次性)、setInterval(间隔循环执行)
+
+```javascript
+// setTimeout,定时指定时间后执行指定函数
+console.log(100);
+setTimeout(function () {
+    console.log(200)
+}, 1000);
+console.log(300);
+```
+
+```javascript
+// setInterval,定时指定时间循环执行指定函数
+console.log(100);
+setInterval(function () {
+    console.log(200)
+}, 1000);
+console.log(300);
+```
