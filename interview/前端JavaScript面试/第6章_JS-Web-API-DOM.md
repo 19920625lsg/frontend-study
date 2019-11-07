@@ -82,9 +82,9 @@
 </head>
 <body>
 <div id="div1" class="container">
-    <p>一段文字1</p>
-    <p>一段文字2</p>
-    <p>一段文字3</p>
+    <p id="p1">一段文字1</p>
+    <p id="p2">一段文字2</p>
+    <p id="p3">一段文字3</p>
 </div>
 <div id="div2">
     <img src="http://w3.huawei.com/w3lab/rest/yellowpage/face/00379880/120" alt="">
@@ -131,3 +131,30 @@ p.setAttribute('style', 'font-size:30px');
 + property:修改对象属性，不会体现到html结构中
 + attribute:修改html属性，会改变html结构
 + 两者都可能引起DOM重新渲染
+
+## 6.4 DOM结构操作
+
+### 新增/插入节点
+
+> dom.js
+
+```javascript
+// 4.新增/插入/移动节点
+const div_1 = document.getElementById('div1');
+// 添加新节点
+const p1 = document.createElement('p');
+p1.innerHTML = 'this is p1';
+// 添加新的元素
+div_1.appendChild(p1);
+// 移动已有节点，注意是移动！！！
+const p2 = document.getElementById('p2');
+div1.appendChild(p2);
+```
+
+## 6.5 DOM性能
+
++ DOM操作非常昂贵，避免频繁的DOM操作
++ 对DOM查询做缓存
+  > ![对DOM查询做缓存](https://img1.sycdn.imooc.com/szimg/5dc40ee90001313b19201080.jpg)
++ 将频繁操作改为一次操作
+  > ![将频繁操作改为一次操作](https://img.mukewang.com/szimg/5dc411690001e3a719201080.jpg)
