@@ -61,7 +61,7 @@ alert(200); // 这一步会阻塞下面的所有操作
 console.log(300);
 ```
 
-### 异步和同步的总结
+### 异步和同步的区别
 
 + 基于JS是单线程语言
 + 异步不会阻塞代码执行
@@ -70,7 +70,7 @@ console.log(300);
 ## 5.2 应用场景
 
 + 网络请求，如ajax请求、图片加载
-+ 定时任务，如setTimeout
++ 定时任务，如setTimeout、setInterval
 
 ### 网络请求，如ajax请求、图片加载
 
@@ -170,4 +170,71 @@ getData(url1).then(data1 => {
 }).catch(err =>{
     console.log(err);
 })
+```
+
+## 5.4 问题解答与总结
+
+### 使用异步Promise加载一张图片
+
+```javascript
+function loadImg(src) {
+    return new Promise((resolve, reject) => { // resolve和reject都是函数
+        const img = document.createElement('img');
+        img.onload = () => {
+            resolve(img);
+        };
+        img.onerror = () => {
+            let err = new Error(`图片加载失败！${src}`);
+            reject(err);
+        };
+        img.src = src
+    })
+}
+
+// 使用Promise
+const url = 'https://i.loli.net/2019/11/02/WjfdAirGBtRZC7U.jpg';
+loadImg(url).then(img => { // 第一个then起resolve的作用
+    console.log(img.width);
+    return img; // 第一个then的结果传给第二个then
+}).then(img => {
+    console.log(img.height); // 不继续return就不用往下继续return了
+}).catch(ex => { // 起reject的作用
+    console.log(ex)
+});
+```
+
+### 使用异步Promise加载多张图片
+
+```javascript
+function loadImg(src) {
+    return new Promise((resolve, reject) => { // resolve和reject都是函数
+        const img = document.createElement('img');
+        img.onload = () => {
+            resolve(img);
+        };
+        img.onerror = () => {
+            let err = new Error(`图片加载失败！${src}`);
+            reject(err);
+        };
+        img.src = src
+    })
+}
+
+// 使用Promise
+const url1 = 'https://i.loli.net/2019/11/02/WjfdAirGBtRZC7U.jpg';
+const url2 = 'https://i.loli.net/2019/11/02/3YAkm4F8alHwdD6.jpg';
+loadImg(url1).then(img1 => { // 第一个then起resolve的作用
+    console.log(img1.width);
+    return img1; // 第一个then的结果传给第二个then，return一个普通对象
+}).then(img1 => {
+    console.log(img1.height); // 继续加载第二张图片
+    return loadImg(url2); // 返回一个Promise实例，下一个then直接拿到img2
+}).then(img2 => {
+    console.log(img2.width);
+    return img2;
+}).then(img2 => {
+    console.log(img2.height);
+}).catch(ex => { // 起reject的作用
+    console.log(ex)
+});
 ```
