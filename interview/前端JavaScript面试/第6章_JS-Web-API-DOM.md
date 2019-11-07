@@ -50,14 +50,82 @@
 + property
 + attribute
 
-### 获取DOM节点
+### 1.获取DOM节点
 
 ![获取DOM节点](https://img.mukewang.com/szimg/5dc3eb650001d31519201080.jpg)
 
-### property操作
+### 2.property操作
 
 ![property](https://img.mukewang.com/szimg/5dc3ec990001dac019201080.jpg)
 
-### attribute操作
+### 3.attribute操作
 
 ![attribute](https://img.mukewang.com/szimg/5dc3ece30001cb5f19201080.jpg)
+
+### DOM操作 `dom.html`和`dom.js`
+
+> dom.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM操作</title>
+    <style>
+        .container {
+            border: 1px solid #ccc;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" class="container">
+    <p>一段文字1</p>
+    <p>一段文字2</p>
+    <p>一段文字3</p>
+</div>
+<div id="div2">
+    <img src="http://w3.huawei.com/w3lab/rest/yellowpage/face/00379880/120" alt="">
+</div>
+<script src="dom.js"></script>
+</body>
+</html>
+```
+
+> dom.js
+
+```javascript
+// 1.获取到元素
+const div1 = document.getElementById('div1'); // 方式1：根据id拿到元素
+console.log('div1', div1);
+const divList = document.getElementsByTagName('div'); // 方式2：根据元素类型拿到所有的div元素
+console.log('divList.length', divList.length);
+console.log('divList[1]', divList[1]);
+const containerList = document.getElementsByClassName('container'); // 方式3：根据类名拿到类名为container的所有元素
+console.log('containerList.length', containerList.length);
+console.log('containerList[0]', containerList[0]);
+const pList = document.querySelectorAll('p'); // 方式4：类似getElementsByTagName
+console.log('pList', pList);
+
+// 2.操作property
+const p = pList[1];
+console.log(p.style.width); // 获取样式
+p.style.width = '100px'; // 修改样式
+console.log(p.className); // 获取class
+p.className = 'red'; // 修改class,中间一个元素变成红色
+// 获取nodeName 和 nodeType
+console.log(p.nodeName);
+console.log(p.nodeType);
+
+// 3.操作attribute
+p.getAttribute('data-name');
+p.setAttribute('data-name', 'imooc');
+p.getAttribute('data-name');
+p.getAttribute('style');
+p.setAttribute('style', 'font-size:30px');
+```
+
