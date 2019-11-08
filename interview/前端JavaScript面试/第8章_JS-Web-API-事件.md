@@ -134,3 +134,56 @@ bindEvent(btn1, 'click', event => {
 </html>
 ```
 
+## 8.2 事件代理
+
+> 利用事件冒泡地向上机制，实现用父元素接管多个子元素的指定事件，尤其当有多个同标签子元素时，不方便给每个子元素绑定事件时。这种方法就叫事件代理
+
+### 示例代码
+
+```javascript
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件代理演示</title>
+    <style>
+        div {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="div3">
+    <a href="#">a1</a><br>
+    <a href="#">a2</a><br>
+    <a href="#">a3</a><br>
+    <a href="#">a4</a><br>
+    <button>加载更多...</button>
+</div>
+<script>
+    // 通用的事件绑定函数
+    function bindEvent(elem, type, fn) {
+        elem.addEventListener(type, fn);
+    }
+
+    const div3 = document.getElementById('div3');
+    bindEvent(div3, 'click', event => {
+        event.preventDefault(); // 阻止默认事件
+        const target = event.target;
+        // 要判断下元素类型，这里只处理a标签,返回指定元素的内容，不用挨个处理每个a，只需要在父div上处理即可
+        if (target.nodeName === 'A') {
+            alert(target.innerHTML);
+        }
+    })
+</script>
+</body>
+</html>
+```
+
+### 事件代理作用和使用建议
+
++ 代码简洁
++ 减少浏览器内存占用
++ 但是，不要滥用
